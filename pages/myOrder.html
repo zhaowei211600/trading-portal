@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet" href="../styles/common/common.css" />
+    <link rel="stylesheet" href="../styles/order.css" />
+    <link rel="stylesheet" href="../styles/font/iconfont.css" />
+    <script type="text/javascript" src="../scripts/lib/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="../scripts/common/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../scripts/common/common.js"></script>
+    <title>订单</title>
+</head>
+<body>
+<div class="content-wrap my-asset-i">
+    <!--顶部导航搜索-->
+    <div class="top-search">
+        <div class="search-bar" style="text-align: center">
+            我的订单
+        </div>
+        <a href="#" class="s-back"></a>
+    </div>
+    <!--数据空-->
+    <div class="data-empty">
+        <div class="empty-img"><i class="iconfont icon-kafei"></i></div>
+        <div class="empty-msg">还没有订单，快去接单</div>
+    </div>
+    <!--数据列表-->
+    <div class="content-body">
+        <ul>
+            <li id="find_product">
+                <div style="display: flex;flex-direction: row;padding: 10px;align-items: center;">
+                    <div><img style="width: 40px;" src="../styles/images/portrait.png"/></div>
+                    <div style="flex: 1;padding: 0 15px;">
+                        <div style="font-size: 16px;">找项目</div>
+                        <div style="margin-top: 10px;line-height: 25px;color: #999999;">去查看最新项目，赚钱了</div>
+                    </div>
+                    <span class="iconfont icon-youjiantou"></span>
+                </div>
+            </li>
+        </ul>
+        <div class="load-more">加载更多</div>
+    </div>
+</div>
+<div class="wrap">
+
+    <!--菜单-->
+    <div class="menu">
+        <div class="menu1">
+            <div class="home" id="home">首页</div>
+        </div>
+        <div class="menu2 bg">
+            <div class="my_order" id="my_order">订单</div>
+        </div>
+        <div class="menu3">
+            <div class="user_center" id="user_center">我的</div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+	//苹果手机定位弹窗表单输入光标错位兼容
+	// $(function () {
+	// 	$('.search-info input').bind("focus",function(){
+	// 		$(".content-wrap .search-body").css({"position":"absolute"});
+	// 	}).bind("blur",function(){
+	// 		$(".content-wrap .search-body").css("position","fixed");
+	// 	});
+	// })
+	// var sh;//记录初始滚动高度
+	// $(document).off('touchstart').on('touchstart', function(e) {
+	// 	sh = $(document).scrollTop();
+	// });
+	// $(document).off('touchmove').on('touchmove', function(e) {
+	// 	if ($(e.target).attr("class") === "layer-close") { //
+	// 		e.preventDefault();
+	// 	}
+	// });
+	// $(document).off('touchend').on('touchend', function(e) {
+	// 	$(document).scrollTop(sh);
+	// });
+    
+</script>
+<script type="text/javascript" src="../scripts/myOrder.js"></script>
+</body>
+</html>
