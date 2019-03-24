@@ -1,8 +1,10 @@
 //点击事件
 $(function () {
 
-        $("#myWallet").click(function () {
-            window.location.href = "../pages/myWallet.html";
+        $("#aboutUs").click(function () {
+            //window.location.href = "../pages/aboutUs.html";
+            greenAlertBox('正在开发中...')
+            return false
         });
         $("#changePassword").click(function () {
             window.location.href = "../pages/changePassword.html";
@@ -69,9 +71,8 @@ var walletList = {
         //只显示待接单
         _this.params.status = 1;
         $.ajax({
-            url: BASEURL + "/product/list",
-            data: JSON.stringify(_this.params),
-            type: "post",
+            url: BASEURL + "/product/home",
+            type: "get",
             dataType: "json",
             contentType: "application/json",
             success: function(data) {
@@ -85,32 +86,29 @@ var walletList = {
 
                     // 将 返回数据中每一项下的checkInvoice属性扩展到该项后面
                     mapData.forEach(function (item, index, array) {
+                        var productType = '';
+                        if(item.productType == '1'){
+                            productType = '买方';
+                        }else{
+                            productType = '卖方';
+                        }
                         dataHTML +=
                             "<li style=\"margin-bottom: 10px;margin-top: 0;padding: 10px 15px;border: none;background: white;\" onclick='showDetail("+item.id+")'>" +
                             "                <div>" +
-                            "                    <div style=\"font-size: 16px;\">\n" +
-                            "                        "+item.name+"<span style=\"font-size: 12px;color: #999999;float: right;\">"+item.createTime+"</span>" +
+                            "                    <div style=\"font-size: 16px;\">" +
+                            "                        <span>"+item.name+"</span>" +
                             "                    </div>" +
-                            "                    <div style=\"padding-top: 5px;\">\n" +
-                            "                        预算：<span style=\"color: red;\">￥"+item.budget+"</span>\n" +
+                            "                    <div style=\"padding-top: 5px;\">" +
+                            "                        预算：<span style=\"color: red;\">￥"+item.budget+"</span>" +
                             "                    </div>" +
-                            "                    <div style=\"padding-top: 5px;color: #999999;\">\n" +
-                            item.desc +
+                            "                    <div style=\"padding-top: 5px;color: #999999;\">\n" + item.createTime +
+                            "                           <span style=\"font-size: 12px;color: #999999;float: right;\">"+productType+"</span>"+
                             "                    </div>" +
-                            "                    <div style=\"display: flex;flex-direction: row;justify-content: space-between;padding-top: 5px;font-size: 12px;\">\n" +
-                            "                        <div>工期：<span>"+item.period+"</span>个月</div>\n" +
-                            "                        <div>期望交付时间：<span>"+item.expectDeliveryTime+"</span></div>\n" +
-                            "                    </div>\n" +
-                            "                </div>\n" +
+                            "                    <div style=\"padding-top: 5px;color: #999999;\">" + item.area + "</div>" +
+                            "                </div>" +
                             "            </li>";
                     });
                     $(".content-body ul").append(dataHTML);
-                    if($(".content-body ul").children().length < data.total){
-                        $(".load-more").text("加载更多");
-                        _this.loadOK = true;
-                    }else{
-                        $(".load-more").text("没有更多");
-                    }
                 };
                 if(mapData.length <= 0 && $(".content-body ul").children().length<=0 ){
                     $(".content-wrap .content-body").hide();
@@ -133,12 +131,7 @@ var walletList = {
 };
 
 +(function(){
-    if(!$.cookie('Authorization')){
-        greenAlertBox("未登录，需登录后查看");
-        setTimeout("window.location.href = '../pages/login.html'", 1500);
-    }else{
-        walletList.init();
-    }
+    walletList.init();
 })();
 
 function showDetail(id){

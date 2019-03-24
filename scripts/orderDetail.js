@@ -13,11 +13,9 @@ function GetRequest() {
 }
 var param = GetRequest();
 $(function () {
-
     $.ajax({
-        url: BASEURL + "/product/find?productId="+param['productId'],
-        data: JSON.stringify(param),
-        type: "post",
+        url: BASEURL + "/user/require/detail?requirementId="+param['requirementId'],
+        type: "get",
         dataType: "json",
         contentType: "application/json",
         success: function(result) {
@@ -25,21 +23,16 @@ $(function () {
                 var status = '';
                 var data = result.data;
                 orderStatus = data.status;
-                $("#productName").html(data.name);
-                $("#budget").html("￥"+data.budget);
-                $("#expectDeliveryTime").html(data.expectDeliveryTime);
-                $("#publishTime").html(data.createTime);
+                $("#requirementId").html(data.requirementId);
+                $("#createTime").html(data.createTime);
                 $("#desc").html(data.desc);
-                $("#period").html(data.period);
-                $("#contactPhone").html(data.phone);
+                $("#typeName").html(data.typeName);
                 if(data.status == '1'){
-                    status = '待接单';
+                    status = '待审核';
                 }else if(data.status == '2'){
-                    status = '进行中';
+                    status = '已确认';
                 }else if(data.status == '3'){
-                    status = '待验收';
-                }else if(data.status == '4'){
-                    status = '已验收';
+                    status = '已发布';
                 }
                 $("#status").html(status);
 
@@ -47,6 +40,7 @@ $(function () {
         }
     })
 });
+/*
 
 $(function () {
     $("#apply").click(function () {
@@ -57,4 +51,4 @@ $(function () {
             window.location.href = '../pages/order-apply.html?productId='+param['productId'];
         }
     });
-});
+});*/

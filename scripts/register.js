@@ -1,10 +1,8 @@
 loadingBlue()
-var cardImgFront;
-var cardImgBack;
 $(function () {
     "use strict";
     $('.loadingBlue').remove()
-    var jsondata,phone,password,passcheck,phonecheck,captcha,reg,realName, cardNo;
+    var jsondata,phone,password,passcheck,phonecheck,captcha,reg,realName, cardNo, recommender, recommenderPhone;
     $(".l-close, .agree").click(function () {
         $("#user-layer").hide();
     });
@@ -19,6 +17,8 @@ $(function () {
         captcha = $("#yzm").val();
         realName = $("#realName").val();
         cardNo = $("#cardNo").val();
+        recommender = $("#recommender").val();
+        recommenderPhone = $("#recommenderPhone").val();
 
         phonecheck = checkPhone(phone,1,passcheck,password,captcha);
         if(!phonecheck) {
@@ -32,8 +32,8 @@ $(function () {
             return false
         }
         var form = new FormData();
-        form.append("cardImgBack", cardImgBack);
-        form.append("cardImgFront", cardImgFront);
+        form.append("recommender", recommender);
+        form.append("recommenderPhone", recommenderPhone);
         form.append("phone", phone);
         form.append("password", password);
         form.append("messageCode", captcha);
@@ -165,88 +165,3 @@ $(function () {
     }
 
 });
-
-//上传图片
-function validateCardImgFront(ele) {
-    var file = ele.value;
-    if (!/.(jpg|jpeg|png)$/.test(file)) {
-        // alert('请上传正确格式的个人名片')
-        greenAlertBox( '请上传正确格式证件照')
-        return false;
-    } else {
-        if (((ele.files[0].size).toFixed(2)) >= (2 * 1024 * 1024)) {
-            // alert('请上传小于5M的图片')
-            greenAlertBox( '请上传小于2M的图片')
-            return false;
-        } else {
-            // $('.tipShow').show();
-            //获取文件
-            var file = $("#cardImgFront")[0].files[0];
-            //创建读取文件的对象
-            var reader = new FileReader();
-            //创建文件读取相关的变量
-
-            //为文件读取成功设置事件
-            reader.onload = function (e) {
-                // alert('文件读取完成');
-                cardImgFront = file;
-                //console.log(cardImgFront);
-                $("#cardImgFront_img").attr('src', e.target.result);
-            };
-            reader.readAsDataURL(file);
-        }
-    }
-}
-
-function validateCardImgBack(ele) {
-    var file = ele.value;
-    if (!/.(jpg|jpeg|png)$/.test(file)) {
-        // alert('请上传正确格式的个人名片')
-        greenAlertBox( '请上传正确格式证件照')
-        return false;
-    } else {
-        if (((ele.files[0].size).toFixed(2)) >= (2 * 1024 * 1024)) {
-            // alert('请上传小于5M的图片')
-            greenAlertBox( '请上传小于2M的图片')
-            return false;
-        } else {
-            // $('.tipShow').show();
-            //获取文件
-            var file = $("#cardImgBack")[0].files[0];
-            //创建读取文件的对象
-            var reader = new FileReader();
-            //创建文件读取相关的变量
-
-            //为文件读取成功设置事件
-            reader.onload = function (e) {
-                // alert('文件读取完成');
-                cardImgBack = file;
-
-                //console.log(cardImgFront);
-                $("#cardImgBack_img").attr('src', e.target.result);
-            };
-            reader.readAsDataURL(file);
-            //uploadFile(file);
-        }
-    }
-}
-
-function uploadFile(data) {
-        var formData = new FormData();
-        formData.append("file",data);
-        //压缩后异步上传
-        $.ajax({
-            url : BASEURL + "/user/file/upload",
-            type: "POST",
-            data : formData,
-            processData: false,
-            contentType: false,
-            crossDomain: true == !(document.all),
-            success : function(data) {
-                alert("成功");
-            },
-            error : function(){
-
-            }
-        });
-}

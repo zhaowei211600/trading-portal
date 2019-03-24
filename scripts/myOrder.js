@@ -52,7 +52,7 @@ var orderList = {
     query: function(){
         var _this = this;
         $.ajax({
-            url: BASEURL + "/order/user",
+            url: BASEURL + "/user/require/list",
             data: JSON.stringify(_this.params),
             type: "post",
             dataType: "json",
@@ -69,31 +69,26 @@ var orderList = {
                     // 将 返回数据中每一项下的checkInvoice属性扩展到该项后面
                     mapData.forEach(function (item, index, array) {
                         if(item.status == '1'){
-                            status = '待确认';
+                            status = '待审核';
                         }else if(item.status == '2'){
-                            status = '已接单';
+                            status = '已确认';
                         }else if(item.status == '3'){
-                            status = '待验收';
-                        }else if(item.status == '4'){
-                            status = '已验收';
-                        }else if(item.status == '4'){
-                            status = '抢单失败';
+                            status = '已发布';
                         }
                         dataHTML +=
                             "<li>" +
                             "<table>" +
                             "<tr class='standard'>" +
-                            "<td colspan='4'>" + item.productName + "</td>" +
+                            "<td colspan='4'>" + item.requirementId + "</td>" +
                             "</tr>" +
                             "<tr>" +
-                            "<td colspan='2'>¥" + item.budget + "</td>" +
-                            "<td colspan='2'>" + status + "</td>" +
+                            "<td colspan='4' style='text-align: right'>" + status + "</td>" +
                             "</tr>" +
                             "<tr>" +
-                            "<td colspan='4'>¥" + item.createTime + "</td>" +
+                            "<td colspan='4'>" + item.createTime + "</td>" +
                             "</tr>" +
                             "</table>" +
-                            "<a href='../pages/order-detail.html?productId=" + item.productId + "' class='ticket-info'>" +
+                            "<a href='../pages/order-detail.html?requirementId=" + item.id + "' class='ticket-info'>" +
                             "<i class='iconfont icon-youjiantou'></i>" +
                             "</a>" +
                             "</li>";
