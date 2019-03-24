@@ -169,6 +169,10 @@ $(function () {
             greenAlertBox('正在开发中...')
             return false
         });
+        $("#productList").click(function () {
+            window.location.href = "../pages/productList.html";
+        });
+
         $(".wrap-btn-quit").click(function () {
             loadingBlue()
             exitSystem();

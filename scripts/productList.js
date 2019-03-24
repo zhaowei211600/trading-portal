@@ -1,29 +1,21 @@
-//点击事件
-$(function () {
-
-        $("#aboutUs").click(function () {
-            //window.location.href = "../pages/aboutUs.html";
-            greenAlertBox('正在开发中...')
-            return false
-        });
-        $("#changePassword").click(function () {
-            window.location.href = "../pages/changePassword.html";
-        });
-        $(".wrap-btn-quit").click(function () {
-            loadingBlue()
-            exitSystem();
-        });
-});
-
-/*我的钱包*/
-var walletList = {
+var productList = {
     init: function(){
         this.loadOK = false;
         this.params = {};
-        //this.common();
+        this.initParams();
+        this.common();
         this.searchLayer();
         this.query();
         this.loadMore();
+    },
+    initParams: function(){
+        this.params.page = 1;
+        this.params.pageSize = 10;
+        //this.params.sendStatus = "";
+        //this.params.checkResult = "";
+        this.params.productName = "";
+        //this.params.invoiceCode = "";
+        //this.params.invoiceNumber = "";
     },
     common: function(){
         var urlParams = "";
@@ -59,20 +51,37 @@ var walletList = {
             $(this).addClass("on").siblings().removeClass("on");
         });
 
+        // 重置
+        $(".reset").click(_this.resetLayer);
+
+        // 确认
+        $(".submit").click(function(){
+            //_this.params.sendStatus = $(".email-status .layer-btn-es a").hasClass("on") ? $(".email-status .layer-btn-es .on").attr("data-sendStatus") : "";
+            //_this.params.checkResult = $(".check-status .layer-btn-cs a").hasClass("on") ? $(".check-status .layer-btn-cs .on").attr("data-checkResult") : "";
+            _this.params.productName = $(".search-info .productName").val();
+            //_this.params.invoiceCode = $(".search-info .invoiceCode").val();
+            //_this.params.invoiceNumber = $(".search-info .invoiceNumber").val();
+
+            $(".content-body ul").html("");
+
+            _this.query();
+            $("html").css({"overflow": "visible", "height": "auto"});
+            $("body").css({"overflow": "visible", "height": "auto"});
+            $(".search-body").hide();
+        });
     },
     // 重置弹层
     resetLayer: function(){
-        $(".email-status a").removeClass("on");
-        $(".check-status a").removeClass("on");
+        //$(".email-status a").removeClass("on");
+        //$(".check-status a").removeClass("on");
         $(".search-info input").val("");
     },
     query: function(){
         var _this = this;
-        //只显示待接单
-        _this.params.status = 1;
         $.ajax({
-            url: BASEURL + "/product/home",
-            type: "get",
+            url: BASEURL + "/product/list",
+            data: JSON.stringify(_this.params),
+            type: "post",
             dataType: "json",
             contentType: "application/json",
             success: function(data) {
@@ -83,7 +92,6 @@ var walletList = {
                     $(".content-wrap .content-body").show();
                     $(".content-wrap .data-empty").hide();
                     var dataHTML = "";
-
                     // 将 返回数据中每一项下的checkInvoice属性扩展到该项后面
                     mapData.forEach(function (item, index, array) {
                         var productType = '';
@@ -93,7 +101,8 @@ var walletList = {
                             productType = '卖方';
                         }
                         dataHTML +=
-                            "<li style=\"margin-bottom: 10px;margin-top: 0;padding: 10px 15px;border: none;background: white;\" onclick='showDetail("+item.id+","+item.productType+")'>" +
+                            "<li style=\"margin-bottom: 10px;margin-top: 0;padding: 10px 15px;border: none;background: white;\" " +
+                            "   onclick='showDetail("+item.id+","+item.productType+")'>" +
                             "                <div>" +
                             "                    <div style=\"font-size: 16px;\">" +
                             "                        <span>"+item.name+"</span>" +
@@ -109,6 +118,12 @@ var walletList = {
                             "            </li>";
                     });
                     $(".content-body ul").append(dataHTML);
+                    if($(".content-body ul").children().length < data.total){
+                        $(".load-more").text("加载更多");
+                        _this.loadOK = true;
+                    }else{
+                        $(".load-more").text("没有更多");
+                    }
                 };
                 if(mapData.length <= 0 && $(".content-body ul").children().length<=0 ){
                     $(".content-wrap .content-body").hide();
@@ -131,7 +146,7 @@ var walletList = {
 };
 
 +(function(){
-    walletList.init();
+    productList.init();
 })();
 
 //1-居间 2-承接

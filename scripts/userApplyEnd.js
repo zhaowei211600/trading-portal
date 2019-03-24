@@ -1,5 +1,5 @@
 $(function () {
-    $("#reApply").click(function () {
+    $("#apply").click(function () {
         window.location.href = "../pages/userApply.html";
     });
     //获取认证状态

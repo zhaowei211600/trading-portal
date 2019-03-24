@@ -1,8 +1,8 @@
 //通用环境
-var BASEURL = 'http://127.0.0.1:10002';
+//var BASEURL = 'http://127.0.0.1:10002';
 //var BASEURL = 'http://39.106.157.230:10002';
 //var BASEURL = 'http://118.190.146.125:10002';
-//var BASEURL = 'http://zhaobangshou.com.cn/backmobile';
+var BASEURL = 'http://zhaobangshou.com.cn/backportal';
 
 
 
@@ -85,8 +85,8 @@ $(function () {
     $(".home").click(function () {
         window.location.href = "../pages/home.html";
     });
-    $(".my_order").click(function () {
-        window.location.href = "../pages/myOrder.html";
+    $(".product_list").click(function () {
+        window.location.href = "../pages/productList.html";
     });
     $(".user_center").click(function () {
         window.location.href = "../pages/userCenter.html";
