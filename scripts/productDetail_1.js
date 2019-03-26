@@ -58,8 +58,12 @@ $(function () {
 
                 $("#acceptingSide").html(data.acceptingSide);
                 $("#process").html(data.process);
-                $("#tradeDetail").html(data.tradeDetail);
                 $("#desc").html(data.desc);
+
+                if($.cookie('Authorization')){
+                    $(".unLogin").css('display','none');
+                    $("#tradeDetail").html(data.tradeDetail);
+                }
 
             }
         }
@@ -73,7 +77,6 @@ $(function () {
         success: function(result) {
             if (result.returnCode == "200") {
                 var data = result.data;
-                orderStatus = data.status;
                 $("#typeDesc").html(data.typeDesc);
                 $("#typeProcess").html(data.process);
                 $("#typeName").html(data.typeName);
@@ -93,7 +96,9 @@ $(function () {
                 var tbody = "";
                 for (var i = 0; i < data.length; i++) {
                     var item = data[i];
-                    tbody += "<div class=\"flex\"><div>附件：</div><div>"+item.fileName+"</div><div class=\"look\">查看</div></div>";
+                    tbody += "<div class=\"flex\"><div>附件：</div>" +
+                        "<div>"+item.fileName+"</div>" +
+                        "<a class=\"look\" target='_blank' href='"+BASEURL+"/user/file/attachment?fileName="+item.filePath+"'>查看</a></div>";
                 }
                 $("#attachmentList").html(tbody);
 
@@ -102,16 +107,3 @@ $(function () {
     })
 });
 
-
-/*
-
-$(function () {
-    $("#apply").click(function () {
-        if(orderStatus != '2'){
-            greenAlertBox('当前状态无法结项');
-            return false;
-        }else{
-            window.location.href = '../pages/order-apply.html?productId='+param['productId'];
-        }
-    });
-});*/
