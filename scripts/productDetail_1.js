@@ -13,6 +13,35 @@ function GetRequest() {
 }
 var param = GetRequest();
 $(function () {
+    $('.itemBtn').click(function () {
+        $('.itemBtn').removeClass('active')
+        $(this).addClass('active')
+        var item = $(this).attr('title')
+        $('.maginBottom').addClass('hidden')
+        switch (item){
+            case '0':
+            {
+                $('.maginBottom:eq(0)').removeClass('hidden')
+                break;
+            }
+            case '1':
+            {
+                $('.maginBottom:eq(1)').removeClass('hidden')
+                break;
+            }
+            case '2':
+            {
+                $('.maginBottom:eq(2)').removeClass('hidden')
+                break;
+            }
+            case '3':
+            {
+
+                $('.maginBottom:eq(3)').removeClass('hidden')
+                break;
+            }
+        }
+    })
     $.ajax({
         url: BASEURL + "/product/find?productId="+param['productId'],
         type: "get",
@@ -21,9 +50,17 @@ $(function () {
         success: function(result) {
             if (result.returnCode == "200") {
                 var data = result.data;
+                $("#productId").html(data.productId);
+                $("#type").html(data.firstTypeName +"-"+ data.secondTypeName);
+                $("#budget").html(data.budget);
+                $("#createTime").html(data.createTime);
+                $("#area").html(data.area);
+
                 $("#acceptingSide").html(data.acceptingSide);
                 $("#process").html(data.process);
                 $("#tradeDetail").html(data.tradeDetail);
+                $("#desc").html(data.desc);
+
             }
         }
     })
@@ -41,6 +78,25 @@ $(function () {
                 $("#typeProcess").html(data.process);
                 $("#typeName").html(data.typeName);
                 $("#rules").html(data.rules);
+            }
+        }
+    })
+
+    $.ajax({
+        url: BASEURL + "/product/attachment?productId="+param['productId'],
+        type: "get",
+        dataType: "json",
+        contentType: "application/json",
+        success: function(result) {
+            if (result.returnCode == "200") {
+                var data = result.data;
+                var tbody = "";
+                for (var i = 0; i < data.length; i++) {
+                    var item = data[i];
+                    tbody += "<div class=\"flex\"><div>附件：</div><div>"+item.fileName+"</div><div class=\"look\">查看</div></div>";
+                }
+                $("#attachmentList").html(tbody);
+
             }
         }
     })

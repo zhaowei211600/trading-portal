@@ -103,3 +103,6 @@ li {
     margin-bottom: 0.6rem;
 
 }
+.hidden{
+    display: none;
+}

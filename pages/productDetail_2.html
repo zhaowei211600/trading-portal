@@ -20,34 +20,37 @@
 </div>
 
 <div class="listItem">
-    <div class="active">业务介绍</div>
-    <div>承接方信息</div>
-    <div>业务进展</div>
-    <div>详细信息及分润</div>
+    <div class="active itemBtn" title="0">业务介绍</div>
+    <div class="itemBtn" title="1">承接方信息</div>
+    <div class="itemBtn" title="2">业务进展</div>
+    <div class="itemBtn" title="3">详细信息及分润</div>
 </div>
-<div class="f14 detail">
-    <div class="weight" id="typeName">土地交易</div>
-    <div id="typeDesc"></div>
+<div class="itemText">
+    <div class="f14 detail">
+        <div class="weight" id="typeName"></div>
+        <div id="typeDesc"></div>
+    </div>
+
+    <div class="f14 detail">
+        <div class="title">——办理流程——</div>
+        <div id="typeProcess"></div>
+    </div>
+    <div class="f14 detail">
+        <div class="title">——分润规则——</div>
+        <div id="rules"></div>
+    </div>
 </div>
 
-<div class="f14 detail">
-    <div class="title">——办理流程——</div>
-    <div id="typeProcess"></div>
-</div>
-<div class="f14 detail">
-    <div class="title">——分润规则——</div>
-    <div id="rules"></div>
-</div>
 
-<div class="f14 detail hidden">
+<div class="f14 detail itemText hidden">
     <div id="acceptingSide"></div>
 </div>
 
-<div class="f14 detail hidden">
+<div class="f14 detail itemText hidden">
     <div id="process"></div>
 </div>
 
-<div class="f14 detail hidden">
+<div class="f14 detail itemText hidden">
     <div id="tradeDetail"></div>
 </div>
 
@@ -62,6 +65,7 @@
 <script type="text/javascript" src="../scripts/common/common.js"></script>
 <script src="../scripts/rem.js"></script>
 <script src="../scripts/productDetail_2.js"></script>
+
 
 
 </body>

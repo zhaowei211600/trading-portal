@@ -20,44 +20,33 @@
 </div>
 
 <div class="listItem">
-    <div >产品介绍</div>
-    <div class="active">基本交易信息</div>
-    <div>详细交易信息</div>
-    <div>交易方资料</div>
+    <div class="active itemBtn"title="0">产品介绍</div>
+    <div class="itemBtn" title="1">基本交易信息</div>
+    <div class="itemBtn" title="2">详细交易信息</div>
+    <div class="itemBtn" title="3">交易方资料</div>
 </div>
 <!--第一部分-->
 <div class="maginBottom">
-    <div class="f14 detail">
-        <div class="weight">资产交易</div>
-        <div>商标注册，随提随审，次日出商标申请号，3个月左右收到受理通知书，12个月拿到商标证书，专属顾问全程一对一专业服务。</div>
+    <div class="itemText">
+        <div class="f14 detail">
+            <div class="weight" id="typeName"></div>
+            <div id="typeDesc"></div>
+        </div>
+
+        <div class="f14 detail">
+            <div class="title">——办理流程——</div>
+            <div id="typeProcess"></div>
+        </div>
+        <div class="f14 detail">
+            <div class="title">——分润规则——</div>
+            <div id="rules"></div>
+        </div>
     </div>
-
-    <div class="f14 detail">
-        <div class="title">——办理流程——</div>
-        <ul>
-            <li>1、准备XXXX</li>
-            <li>1、准备XXXX</li>
-            <li>1、准备XXXX</li>
-            <li>1、准备XXXX</li>
-
-        </ul>
-    </div>
-    <div class="f14 detail">
-        <div class="title">——分润规则——</div>
-        <ul>
-            <li>1、准备XXXX</li>
-            <li>1、准备XXXX</li>
-            <li>1、准备XXXX</li>
-            <li>1、准备XXXX</li>
-
-        </ul>
-    </div>
-
 
 </div>
 
 <!--第二部分-->
-<div class="maginBottom" style="display: none;">
+<div class="maginBottom hidden">
     <div class="f14 padd">
         <div class="flex" style="margin-bottom: 0.05rem;">
             <div class="line"></div>
@@ -66,31 +55,27 @@
         <div>
             <div class="flex">
                 <div>编号：</div>
-                <div>asdfasdfas</div>
+                <div id="productId"></div>
             </div>
             <div class="flex">
                 <div>类型：</div>
-                <div>asdfasdfas</div>
+                <div id="type"></div>
             </div>
             <div class="flex">
                 <div>金额：</div>
-                <div>asdfasdfas</div>
+                <div id="budget"></div>
             </div>
             <div class="flex">
                 <div>发布时间：</div>
-                <div>asdfasdfas</div>
+                <div id="createTime"></div>
             </div>
             <div class="flex">
                 <div style="white-space: nowrap">所在地区：</div>
-                <div>asdfasdfas奥斯卡打飞机阿克苏的哈上刀山啊就是快递号</div>
-            </div>
-            <div class="flex">
-                <div>发布中：</div>
-                <div>asdfasdfas</div>
+                <div id="area"></div>
             </div>
             <div class="flex">
                 <div>项目进展：</div>
-                <div>asdfasdfas</div>
+                <div id="process"></div>
             </div>
         </div>
     </div>
@@ -99,11 +84,7 @@
             <div class="line"></div>
             <div style="font-weight: bolder;margin-left: 0.05rem;">项目概况</div>
         </div>
-        <div>
-            独立第三方医学检验所，位于哈尔滨高新技术产业园，面
-            积1500米。专注于为个体化医疗及大健康领域提供完整基
-            因检测解决方案，是全球分子诊断领军企业德国凯杰（
-            QIAGEN）公司战略合作伙伴。
+        <div id="desc">
         </div>
     </div>
 
@@ -111,7 +92,7 @@
 </div>
 
 <!--第三部分-->
-<div class="maginBottom" style="display: none;">
+<div class="maginBottom hidden" >
 
     <div class="f14 padd">
         <div class="flex" style="margin-bottom: 0.05rem;">
@@ -125,17 +106,14 @@
 </div>
 
 <!--第四部分-->
-<div class="maginBottom" style="display: none;">
+<div class="maginBottom hidden" >
     <div class="f14 padd">
         <div class="flex" style="margin-bottom: 0.05rem;">
             <div class="line"></div>
             <div style="font-weight: bolder;margin-left: 0.05rem;">项目资料</div>
         </div>
-        <div>
-            独立第三方医学检验所，位于哈尔滨高新技术产业园，面
-            积1500米。专注于为个体化医疗及大健康领域提供完整基
-            因检测解决方案，是全球分子诊断领军企业德国凯杰（
-            QIAGEN）公司战略合作伙伴。
+        <div id="attachment">
+
         </div>
     </div>
     <div class="f14 padd">
@@ -143,28 +121,7 @@
             <div class="line"></div>
             <div style="font-weight: bolder;margin-left: 0.05rem;">项目信息</div>
         </div>
-        <div>
-            <div class="flex">
-                <div>附件：</div>
-                <div>asdfasdfas</div>
-                <div class="look">查看</div>
-            </div>
-            <div class="flex">
-                <div>附件：</div>
-                <div>asdfasdfas</div>
-                <div class="look">查看</div>
-            </div>
-            <div class="flex">
-                <div>附件：</div>
-                <div>asdfasdfas</div>
-                <div class="look">查看</div>
-            </div>
-            <div class="flex">
-                <div>附件：</div>
-                <div>asdfasdfas</div>
-                <div class="look">查看</div>
-            </div>
-        </div>
+        <div id="attachmentList">
     </div>
 </div>
 

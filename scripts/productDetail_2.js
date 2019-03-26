@@ -13,6 +13,37 @@ function GetRequest() {
 }
 var param = GetRequest();
 $(function () {
+
+    $('.itemBtn').click(function () {
+
+        $('.itemBtn').removeClass('active')
+        $(this).addClass('active')
+        var item = $(this).attr('title')
+        $('.itemText').addClass('hidden')
+        switch (item){
+            case '0':
+            {
+                $('.itemText:eq(0)').removeClass('hidden')
+                break;
+            }
+            case '1':
+            {
+                $('.itemText:eq(1)').removeClass('hidden')
+                break;
+            }
+            case '2':
+            {
+                $('.itemText:eq(2)').removeClass('hidden')
+                break;
+            }
+            case '3':
+            {
+                $('.itemText:eq(3)').removeClass('hidden')
+                break;
+            }
+        }
+    })
+
     $.ajax({
         url: BASEURL + "/product/find?productId="+param['productId'],
         type: "get",

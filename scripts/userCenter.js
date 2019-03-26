@@ -154,9 +154,9 @@ $(function () {
             window.location.href = "../pages/userApply.html";
         });
         $("#aboutUs").click(function () {
-            //window.location.href = "../pages/aboutUs.html";
-            greenAlertBox('正在开发中...')
-            return false
+            window.location.href = "../pages/aboutUs.html";
+            // greenAlertBox('正在开发中...')
+            // return false
         });
         $("#changePassword").click(function () {
             window.location.href = "../pages/changePassword.html";

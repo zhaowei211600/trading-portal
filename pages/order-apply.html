@@ -8,20 +8,35 @@
     <link rel="stylesheet" type="text/css" href="../styles/font/iconfont.css">
     <link rel="stylesheet" href="../styles/common/common.css" />
     <link rel="stylesheet" href="../styles/home.css" />
+    <style>
+        select{
+            display: block;
+            width: 100%;
+            background-color: #ffffff;
+            height: 40px;
+            font-size: 14px;
+            margin-top: 20px;
+            outline: none;
+        }
+    </style>
 </head>
 <body>
 <!--顶部导航搜索-->
 <div class="search-bar">
-    <a href="../pages/userCenter.html" class="s-back"><i class="iconfont icon-fanhuizuojiantou"></i>返回</a>
-    <a href="../pages/myOrder.html" class="s-btn" style="top:12px;"><i class="iconfont icon-bangzhu"></i></a>
+    <a href="../pages/userCenter.html" class="s-back" style="top: 0;"><i class="iconfont icon-fanhuizuojiantou"></i>返回</a>
+    <a href="../pages/myOrder.html" class="s-btn" style="top:12px;"><i class="iconfont"></i>发布历史</a>
 </div>
 <div class="home-detail-head" style="margin-top: 10px;" >
     <div class="leftright">
         <textarea id="desc" style="border: 1px solid #999999; width: 100%;height: 150px;"></textarea>
     </div>
-    <select id="firstType">
+    <div style="padding: 0 15px;">
+        <select id="firstType">
+        </select>
+    </div>
 
-    </select>
+
+
 </div>
 
 
