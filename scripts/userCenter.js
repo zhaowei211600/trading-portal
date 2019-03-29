@@ -16,7 +16,7 @@ function getAccount() {
             var infoData = data.data
             if (data.returnCode == '200') {
                 $('#phone').text(infoData.phone);
-                $('#name').text(infoData.realName);
+                $('#name').text(infoData.realName + "|");
                 $('#score').text(infoData.score);
                 //1:注册游客 2:会员代理 3:分柜 4:掌柜
                 var userType = '';
@@ -29,7 +29,7 @@ function getAccount() {
                 }else{
                     userType = '注册游客';
                 }
-                $('#userType').text(userType);
+                $('#userType').text(userType + "|");
 
                 var approveState = infoData.authStatus;
                 if (approveState == 1) {
@@ -147,8 +147,10 @@ getAccount();
 $(function () {
 
     if(!$.cookie('Authorization')){
-        greenAlertBox("未登录，需登录后查看");
-        setTimeout("window.location.href = '../pages/login.html'", 1500);
+        var result = confirm("是否去登录？");
+        if(result){
+            setTimeout("window.location.href = '../pages/login.html'", 1500);
+        }
     }else{
         $("#applyMessage").click(function () {
             window.location.href = "../pages/userApply.html";

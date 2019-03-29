@@ -132,6 +132,7 @@ var walletList = {
 
 +(function(){
     walletList.init();
+    showFirstType();
 })();
 
 //1-居间 2-承接
@@ -142,3 +143,30 @@ function showDetail(id,productType){
         window.location.href = '../pages/productDetail_1.html?productId='+id;
     }
 }
+
+function showFirstType() {
+    $.ajax({
+        url: BASEURL + "/user/type/first" ,
+        type: "get",
+        success: function (resultData) {
+            if (resultData.returnCode == 200) {
+                var list = resultData.data;
+                var tbody = "";
+                for (var i = 0; (i < list.length && i<5); i++) {
+                    var content = list[i];
+                    tbody += "<div onclick=\"gotoList("+content.id+")\">" +
+                        "            <div class=\"content-item\">" +
+                        "                <div>"+content.typeName+"</div>" +
+                        "            </div>" +
+                        "        </div>";
+                }
+                $("#productItem").html(tbody);
+            }
+        }
+    });
+}
+
+function gotoList(firstType) {
+    window.location.href = '../pages/productList.html?firstType='+firstType;
+}
+

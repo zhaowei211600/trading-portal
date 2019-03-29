@@ -12,7 +12,7 @@ var productList = {
         this.params.page = 1;
         this.params.pageSize = 10;
         //this.params.sendStatus = "";
-        //this.params.checkResult = "";
+        this.params.firstType = "";
         this.params.productName = "";
         //this.params.invoiceCode = "";
         //this.params.invoiceNumber = "";
@@ -21,7 +21,7 @@ var productList = {
         var urlParams = "";
         if(window.location.search.substr(1).split("=")[1]) {
             urlParams = JSON.parse(decodeURI(window.location.search.substr(1).split("=")[1]));
-            this.params = urlParams;
+            this.params.firstType = urlParams;
         }
     },
     // 弹层
@@ -57,7 +57,7 @@ var productList = {
         // 确认
         $(".submit").click(function(){
             //_this.params.sendStatus = $(".email-status .layer-btn-es a").hasClass("on") ? $(".email-status .layer-btn-es .on").attr("data-sendStatus") : "";
-            //_this.params.checkResult = $(".check-status .layer-btn-cs a").hasClass("on") ? $(".check-status .layer-btn-cs .on").attr("data-checkResult") : "";
+            _this.params.firstType = $(".check-status .layer-btn-cs a").hasClass("on") ? $(".check-status .layer-btn-cs .on").attr("data-checkResult") : "";
             _this.params.productName = $(".search-info .productName").val();
             //_this.params.invoiceCode = $(".search-info .invoiceCode").val();
             //_this.params.invoiceNumber = $(".search-info .invoiceNumber").val();
@@ -73,10 +73,11 @@ var productList = {
     // 重置弹层
     resetLayer: function(){
         //$(".email-status a").removeClass("on");
-        //$(".check-status a").removeClass("on");
+        $(".check-status a").removeClass("on");
         $(".search-info input").val("");
     },
     query: function(){
+
         var _this = this;
         $.ajax({
             url: BASEURL + "/product/list",
@@ -146,7 +147,13 @@ var productList = {
 };
 
 +(function(){
-    productList.init();
+    if(!$.cookie('Authorization')){
+        greenAlertBox("未登录，需登录后查看");
+        setTimeout("window.location.href = '../pages/login.html'", 1500);
+    }else{
+        productList.init();
+        showFirstType();
+    }
 })();
 
 //1-居间 2-承接
@@ -156,4 +163,21 @@ function showDetail(id,productType){
     }else{
         window.location.href = '../pages/productDetail_1.html?productId='+id;
     }
+}
+function showFirstType() {
+    $.ajax({
+        url: BASEURL + "/user/type/first" ,
+        type: "get",
+        success: function (resultData) {
+            if (resultData.returnCode == 200) {
+                var list = resultData.data;
+                var tbody = "";
+                for (var i = 0; i < list.length; i++) {
+                    var content = list[i];
+                    tbody += "<a href=\"javascript:void(0);\" class=\"check-ok\" data-checkResult=\""+content.id+"\">"+content.typeName+"</a>\n";
+                }
+                $("#typeList").html(tbody);
+            }
+        }
+    });
 }
