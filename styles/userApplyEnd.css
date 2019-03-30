@@ -27,8 +27,9 @@
 }
 .icon-cuowu{
     color: #F44336;
-    font-size: 7rem;
-    opacity: 0.5;
+    font-size: 2rem;
+    height: 4.5rem;
+    line-height: 4.5rem;
 }
 .wrap-content-p-20{
     font-size: 1.6rem;

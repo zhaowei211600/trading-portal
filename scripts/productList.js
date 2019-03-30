@@ -147,13 +147,8 @@ var productList = {
 };
 
 +(function(){
-    if(!$.cookie('Authorization')){
-        greenAlertBox("未登录，需登录后查看");
-        setTimeout("window.location.href = '../pages/login.html'", 1500);
-    }else{
-        productList.init();
-        showFirstType();
-    }
+    productList.init();
+    showFirstType();
 })();
 
 //1-居间 2-承接
