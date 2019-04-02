@@ -2,13 +2,14 @@ loadingBlue()
 $(function () {
     "use strict";
     $('.loadingBlue').remove()
-    var jsondata,phone,password,passcheck,phonecheck,captcha,reg,realName, cardNo, recommender, recommenderPhone;
+    var jsondata,phone,password,passcheck,phonecheck,captcha,reg,realName, cardNo, recommender, recommenderPhone,imageCode;
     $(".l-close, .agree").click(function () {
         $("#user-layer").hide();
     });
     $("#yhxy").click(function () {
         $("#user-layer").show();
     });
+    refreshImageCode();
 
     $("#login").click(function () {
         phone = $("#phone").val();
@@ -19,6 +20,7 @@ $(function () {
         cardNo = $("#cardNo").val();
         recommender = $("#recommender").val();
         recommenderPhone = $("#recommenderPhone").val();
+        imageCode = $("#imageCode").val();
 
         phonecheck = checkPhone(phone,1,passcheck,password,captcha);
         if(!phonecheck) {
@@ -39,6 +41,7 @@ $(function () {
         form.append("messageCode", captcha);
         form.append("cardNo", cardNo);
         form.append("realName", realName);
+        form.append("imageCode", imageCode);
 
 
         loadingBlue()
@@ -163,5 +166,8 @@ $(function () {
             },1000);
         });
     }
-
 });
+
+function refreshImageCode() {
+    $('#imageCode').attr('src',BASEURL + '/util/imageCode?flag='+Math.random());
+}

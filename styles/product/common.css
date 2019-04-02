@@ -44,21 +44,23 @@ a,input{-webkit-tap-highlight-color:rgba(255,0,0,0);-webkit-appearance: none;}
 }
 
 .header{
-    line-height: 0.45rem;
+    line-height: 45px;
     text-align: center;
-    font-size: 18px;
+    font-size: 16px;
     background-color: #ffffff;
     position: fixed;
     top: 0;
     width: 100%;
+    z-index: 10;
 }
 
 .backImg{
     position: absolute;
-    top: 0.07rem;
-    left: 0.1rem;
+    left: 10px;
     z-index: 9;
-    width: 0.25rem;
+    top: 0;
+    font-size: 14px;
+    color: #485166;
 }
 
 

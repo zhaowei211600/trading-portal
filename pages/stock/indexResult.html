@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <title>测算结果</title>
+    <link rel="stylesheet" href="../../styles/product/common.css">
+    <link rel="stylesheet" href="../../styles/font/iconfont.css" />
+    <link rel="stylesheet" href="../../scripts/layui/css/layui.css">
+    <style>
+        .footer{
+            font-size: 12px;color: #c2c2c2;display: flex;flex-direction: row;background-color: #716E6E;padding: 15px;
+        }
+        .login-btn {
+            width: 94%;
+            height: 0.44rem;
+            background: red;
+            border: 0;
+            box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.10);
+            margin: 10px 3% 20px;
+            border-radius: 5px;
+            font-size: 1.6rem;
+            color: #FFFFFF;
+            letter-spacing: 0;
+            font-size: 16px;
+        }
+        .layui-colla-content{
+            background-color: #FFFFFF;
+            flex-direction: row;
+        }
+        .layui-colla-title{
+            background-color: #ffffff;
+            font-weight: bolder;
+            font-size: 16px;
+            padding: 0 15px;
+        }
+        .red{
+            color: red;
+        }
+        .layui-show{
+            display: flex!important;
+        }
+        .layui-show > div , .layui-card-body > div{
+            flex: 1;
+            line-height: 30px;
+            color: #101010;
+        }
+        .layui-colla-icon{
+            left: auto;
+            right: 15px;
+        }
+        .layui-card-body{
+            display: flex;
+            flex-direction: row;
+        }
+        .layui-card-header{
+            text-align: center;
+            font-size: 16px;
+            color: #0C4AEC;
+            font-weight: bolder;
+        }
+        .layui-form-mid{
+            padding: 0!important;
+            margin-left:10px;
+            margin-right: 0;
+        }
+        .box{
+            padding: 15px;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <a class="backImg" href="../../pages/stock/index.html" ><i class="iconfont icon-fanhuizuojiantou"></i>返回</a>
+    <div class=" grayGround">金资服</div>
+</div>
+    <div class="layui-collapse">
+        <div class="layui-colla-item" style="margin-top: 55px">
+            <h2 class="layui-colla-title">减持数据</h2>
+            <div class="layui-colla-content layui-show">
+                <div>
+                    <ul>
+                        <li>企业性质</li>
+                        <li>原始投资金额</li>
+                        <li>原始投资日期</li>
+                        <li>股票上市发行日</li>
+                        <li>股票IPO发行价</li>
+                        <li>减持所有股票数</li>
+                        <li>减持股票单价</li>
+                        <li class="red company">企业所得税率</li>
+                        <li class="person">合伙人投资所得税率</li>
+                    </ul>
+                </div>
+                <div>
+                    <ul>
+                        <li id="corpType" style="font-weight: bolder;"></li>
+                        <li><span id="investAmount"></span>   元</li>
+                        <li id="investDate"></li>
+                        <li id="stockDate"></li>
+                        <li><span id="listUnitPrice"></span>    元</li>
+                        <li><span id="reductionQuantity"></span>    股</li>
+                        <li><span id="reductionUnitPrice"></span>   元</li>
+                        <!--<li class="red company">25%</li>-->
+                        <li class="person">20%</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="layui-card" style="margin-top: 10px;">
+        <div class="layui-card-header">非优化收益测算</div>
+        <div class="layui-card-body">
+            <div>
+                <ul>
+                    <li>减持收入总额</li>
+                    <li>交易其他税费</li>
+                    <li>应纳增值税额</li>
+                    <li>应纳所得税额</li>
+                    <li class="company">企业实际所得金额</li>
+                    <li class="company">股东个人分红税额</li>
+                    <li class="company">个人所得实际分红</li>
+                    <li class="person">合伙人实际所得金额</li>
+                </ul>
+            </div>
+            <div>
+                <ul>
+                    <li><span id="reductionAmount"></span>   元</li>
+                    <li><span id="otherTax"></span>元（印花税等）</li>
+                    <li><span id="tax"></span>元</li>
+                    <li><span id="acceptTax"></span>    元</li>
+                    <li class="company" id="partnerAmount"><span></span>    元</li>
+                    <li class="company" id="partnerTax"><span></span>    元</li>
+                    <li><span id="realAmount"></span>   元</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+<!--企业减持优化结果-->
+<div class="layui-card" id="companyOptimize" style="margin-top: 10px; display: none;">
+    <div class="layui-card-header">优化减持结果</div>
+    <div class="layui-card-body">
+        <div>
+            <ul>
+                <li>企业实际所得金额</li>
+                <li>股东个人分红实际所得</li>
+                <li>企业优化后增加金额</li>
+                <li>个人分红增加金额</li>
+            </ul>
+        </div>
+        <div>
+            <ul>
+                <li><span class="partnerAmount">700000.00</span>   元</li>
+                <li><span class="realAmount">700000.00</span>元</li>
+                <li><span class="optimizeAmount">24.45</span>    元</li>
+                <li><span>24.45</span>    元</li>
+
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!--合伙人 优化减持结果-->
+<div class="layui-card" id="personOptimize" style="margin-top: 10px; display: none;">
+    <div class="layui-card-header">优化减持结果</div>
+    <div class="layui-card-body">
+        <div>
+            <ul>
+                <li>合伙人实际所得金额</li>
+                <li>优化后增加金额</li>
+            </ul>
+        </div>
+        <div>
+            <ul>
+                <li><span class="realAmount">700000.00</span>   元</li>
+                <li><span class="optimizeAmount">700000.00</span>元 <div class="red f12">(含增值税返还)</div> </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <button type="button" class="login-btn" id="popBox">获取优化收益</button>
+    <button type="button" class="login-btn" id="reginCal" style="display: none;">重新测算</button>
+
+<div class="footer">
+    <div style="flex: 1;line-height: 30px">
+        <div style="color: #FFFFFF;">咨询联系</div>
+        <div style="color: #FFFFFF;">4008-1236-66</div>
+        <div>北京新路晖帆律师事务所</div>
+    </div>
+    <div style="text-align: center;">
+        <img style="width: 65px;height: 60px;margin-bottom: 5px;" src="../../styles/images/banner03.jpg">
+        <div>关注微信公众号</div>
+    </div>
+</div>
+
+<!--查看优化结果的弹框-->
+
+    <div class="box" style="display: none">
+        <form class="layui-form" action="">
+            <div class="layui-form-item">
+                <input type="text" name="phone" id="phone" required  lay-verify="required" placeholder="留下您的手机号" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-item">
+                <input type="text" name="imageCode" id="imageCode" required lay-verify="required" placeholder="填写验证码" style="width: 55%;float: left;" autocomplete="off" class="layui-input">
+                <div class="layui-form-mid layui-word-aux"><img style="height: 38px;" id="messageImg" onclick="refreshImageCode()" src=""></div>
+            </div>
+            <div class="layui-form-item">
+                <input type="text" name="messageCode" required lay-verify="required" placeholder="填写短信验证码" style="width: 55%;float: left;" autocomplete="off" class="layui-input">
+                <div class="layui-form-mid layui-word-aux" style="width: 40%;"><button class="layui-btn layui-btn-primary" id="getMessage" onclick="getMessageCode()" style="padding: 0 5px;width: 1.3rem;">获取短信验证码</button></div>
+            </div>
+            <div class="red f14">提交后即可获得优化后的减持结果</div>
+            <button type="button" class="login-btn"  lay-submit lay-filter="formDemo">获得优化结果</button>
+        </form>
+    </div>
+
+
+<script src="../../scripts/common/rem.js"></script>
+<script src="../../scripts/layui/layui.js"></script>
+<script type="text/javascript" src="../../scripts/lib/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="../../scripts/common/jquery.cookie.js"></script>
+<script type="text/javascript" src="../../scripts/common/common.js"></script>
+
+<script>
+    +(function(){
+        var index;
+        var statResponse = localStorage.getItem("statResponse");
+        var statRequest = localStorage.getItem("statRequest");
+        var requestData;
+        if(statRequest){
+            requestData = JSON.parse(statRequest)
+            if(requestData.corpType == '1'){ //合伙人
+                $('.person').show()
+                $('.company').hide()
+                $('#corpType').html('有限合伙人')
+            }else if(requestData.corpType == '2'){//有限责任公司
+                $('.company').show()
+                $('.person').hide()
+                $('#corpType').html('有限责任公司')
+            }
+            $('#investAmount').html(requestData.investAmount)
+            $('#investDate').html(requestData.investDate)
+            $('#stockDate').html(requestData.stockDate)
+            $('#listUnitPrice').html(requestData.listUnitPrice)
+            $('#reductionQuantity').html(requestData.reductionQuantity)
+            $('#reductionUnitPrice').html(requestData.reductionUnitPrice)
+        }
+        if(statResponse){
+            var responseData = JSON.parse(statResponse)
+            $('#realAmount').html(responseData.realAmount)
+            $('#partnerTax').html(responseData.partnerTax)
+            $('#reductionAmount').html(responseData.reductionAmount)
+            $('#partnerAmount').html(responseData.partnerAmount)
+            $('#tax').html(responseData.tax)
+            $('#otherTax').html(responseData.otherTax)
+            if(requestData.corpType == '1'){ //合伙人
+                $('#acceptTax').html(responseData.personTax)
+            }else if(requestData.corpType == '2'){//有限责任公司
+                $('#acceptTax').html(responseData.corpTax)
+            }
+
+
+
+        }
+
+        layui.use('element', function(){
+            var element = layui.element;
+        });
+        var layer;
+        var index;
+        layui.use('layer', function(){
+            layer = layui.layer;
+
+        });
+
+        layui.use('form', function(){
+            var form = layui.form;
+
+            //监听提交
+            form.on('submit(formDemo)', function(data){
+                //console.log(JSON.stringify(data.field));
+                var data = $.extend(requestData,data.field)
+                data.statType = '2'
+                $.ajax({
+                    type: "post",
+                    url: BASEURL + '/util/stat',
+                    data: JSON.stringify(data),
+                    dataType: "json",
+                    contentType: "application/json",
+                    success: function (resp) {
+                        console.log(resp)
+                        layer.close(index)
+                        if(resp.returnCode == '200'){
+                            $('#popBox').hide()
+                            $('#reginCal').show()
+                            if(requestData.corpType == '1'){ //合伙人
+                                $('#personOptimize').show()
+                                $('#companyOptimize').hide()
+                                $('.realAmount').html(resp.data.realAmount)
+                                $('.optimizeAmount').html(resp.data.optimizeAmount)
+                            }else if(requestData.corpType == '2'){//有限责任公司
+                                $('#companyOptimize').show()
+                                $('#personOptimize').hide()
+                                $('.realAmount').html(resp.data.realAmount)
+                                $('.partnerAmount').html(resp.data.partnerAmount)
+                                $('.optimizeAmount').html(resp.data.optimizeAmount)
+
+                            }
+                        }
+
+
+                    }
+                })
+            });
+        });
+
+
+        $('#popBox').click(function () {
+            // layui.use('layer', function(){
+            //     var layer = layui.layer;
+
+                index = layer.open({
+                    title:'查看优化信息',
+                    type: 1,
+                    content:$('.box'),//这里content是一个普通的String
+                });
+            // });
+            refreshImageCode()
+        })
+
+        $('#reginCal').click(function () {
+             window.location.href = "../../pages/stock/index.html";
+        })
+
+    })();
+    function getMessageCode() {
+
+        countDown($('#getMessage'))
+        $.ajax({
+            type: "get",
+            url: BASEURL + '/util/messageCode',
+            data: {
+                phone:$('#phone').val(),
+                imageCode:$('#imageCode').val()
+            },
+            contentType: 'application/json;charset=utf-8',
+            success: function (resp) {
+                console.log(resp)
+
+
+            }
+        })
+
+
+    }
+    function refreshImageCode() {
+        $('#messageImg').attr('src',BASEURL + '/util/imageCode?flag='+Math.random());
+    }
+    //倒计时方法
+    function countDown(obj) {
+        var wait = 60;
+        settime(obj);
+
+        function settime(obj) {
+            if (wait == 0) {
+                $(obj).attr("disabled", false);
+                $(obj).text("获取短信验证码");
+                $(obj).css({'color': '#555','border':'1px solid #C9C9C9'});
+                wait = 60;
+                return;
+            } else {
+                $(obj).attr("disabled", true);
+                $(obj).text("(" + wait + ") 秒 ");
+                $(obj).css({'color': 'red','border':'1px solid #C9C9C9'});
+                wait--;
+            }
+            setTimeout(function () {
+                    settime(obj)
+                }
+                , 1000)
+        }
+    };
+</script>
+</body>
+</html>

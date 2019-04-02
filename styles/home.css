@@ -58,7 +58,7 @@ body{
 .acceptBtnStyle{
     height: 40px;
     line-height: 40px;
-    background-color: #0080CC;
+    background-color: red;
     color: #ffffff;
     width: 50%;
     font-size: 16px;
@@ -82,6 +82,8 @@ body{
     position: absolute;
     top: 12px;
     left: 15px;
+    font-size: 14px;
+    color: #485166;
 }
 
 .ft{
@@ -107,7 +109,7 @@ body{
     background-color: #ffffff;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    /*justify-content: space-between;*/
     flex-wrap: wrap;
 
 }

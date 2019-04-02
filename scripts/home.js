@@ -152,7 +152,7 @@ function showFirstType() {
             if (resultData.returnCode == 200) {
                 var list = resultData.data;
                 var tbody = "";
-                for (var i = 0; (i < list.length && i<5); i++) {
+                for (var i = 0; (i < list.length && i<=5); i++) {
                     var content = list[i];
                     tbody += "<div onclick=\"gotoList("+content.id+")\">" +
                         "            <div class=\"content-item\">" +

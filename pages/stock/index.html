@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <title>小非减持</title>
+    <link rel="stylesheet" href="../../styles/product/common.css">
+    <link rel="stylesheet" href="../../styles/font/iconfont.css" />
+    <link rel="stylesheet" href="../../scripts/layui/css/layui.css">
+    <style>
+        body{
+            background: #ffffff;
+        }
+        .banner{
+            margin: 0.45rem 0 0.1rem;
+        }
+        .banner img{
+            width: 100%;
+        }
+        .layui-form-label{
+            float: none;
+            font-size: 16px;
+            font-weight: bolder;
+            padding-left: 3px;
+            text-align: left;
+            width: 120px;
+        }
+        .layui-input-block{
+            margin-left: 0;
+            font-size: 14px;
+        }
+        .login-btn {
+            width: 100%;
+            height: 0.44rem;
+            background: red;
+            border: 0;
+            box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.10);
+            margin-bottom: 20px;
+            margin-top: 10px;
+            border-radius: 5px;
+            font-size: 1.6rem;
+            color: #FFFFFF;
+            letter-spacing: 0;
+            font-size: 16px;
+        }
+        .padd{
+            padding: 0 15px;
+        }
+        .footer{
+            font-size: 12px;color: #c2c2c2;display: flex;flex-direction: row;background-color: #716E6E;padding: 15px;
+        }
+        .backImg{
+            width: auto;
+            top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a class="backImg" href="" ><i class="iconfont icon-fanhuizuojiantou"></i>返回</a>
+        <div class=" grayGround">金资服</div>
+    </div>
+    <div class="banner">
+        <img src="../../styles/images/banner03.jpg"/>
+    </div>
+    <div class="padd">
+        <form class="layui-form" action="">
+            <div class="layui-form-item">
+                <label class="layui-form-label">企业性质</label>
+                <div class="layui-input-block">
+                    <select id="corpType" name="corpType" lay-verify="required">
+                        <option value="">请选择企业性质</option>
+                        <option value="1">有限合伙人</option>
+                        <option value="2">有限责任公司</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">原始投资金额</label>
+                <div class="layui-input-block">
+                    <input type="text" id="investAmount" name="investAmount" required  lay-verify="required" placeholder="请填写原始投资金额(元)" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">原始投资日期</label>
+                <div class="layui-input-block">
+                    <input type="text" name="investDate" id="investDate" required  lay-verify="required" placeholder="请选择原始投资日期" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">股票上市发行日</label>
+                <div class="layui-input-block">
+                    <input type="text" name="stockDate" id="stockDate" required  lay-verify="required" placeholder="请选择股票上市发行日" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">股票IPO发行价</label>
+                <div class="layui-input-block">
+                    <input type="text" name="listUnitPrice" id="listUnitPrice" required  lay-verify="required" placeholder="请填写股票IPO发行价(元)" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">减持所有股票数</label>
+                <div class="layui-input-block">
+                    <input type="text" name="reductionQuantity" id="reductionQuantity" required  lay-verify="required" placeholder="请填写减持所有股票数(股)" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">减持股票单价</label>
+                <div class="layui-input-block">
+                    <input type="text" name="reductionUnitPrice" id="reductionUnitPrice" required  lay-verify="required" placeholder="请填写减持股票单价(元)" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <button type="button" class="login-btn"  lay-submit lay-filter="formDemo" id="stat">立即计算</button>
+            <!--<button class="layui-btn layui-btn-normal"  lay-submit lay-filter="formDemo">立即计算</button>-->
+        </form>
+
+
+    </div>
+    <div class="footer">
+        <div style="flex: 1;line-height: 30px">
+            <div style="color: #FFFFFF;">咨询联系</div>
+            <div style="color: #FFFFFF;">4008-1236-66</div>
+            <div>北京新路晖帆律师事务所</div>
+        </div>
+        <div style="text-align: center;">
+            <img style="width: 65px;height: 60px;margin-bottom: 5px;" src="../../styles/images/banner03.jpg">
+            <div>关注微信公众号</div>
+        </div>
+    </div>
+
+    <script src="../../scripts/common/rem.js"></script>
+    <script src="../../scripts/layui/layui.js"></script>
+    <script type="text/javascript" src="../../scripts/lib/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/common/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../../scripts/common/common.js"></script>
+
+    <script>
+        //Demo
+        layui.use('form', function(){
+            var form = layui.form;
+
+            //监听提交
+            form.on('submit(formDemo)', function(data){
+                layer.msg(JSON.stringify(data.field));
+                var params = JSON.stringify(data.field);
+                params.statType = 1;
+                $.ajax({
+                    url: BASEURL + "/util/stat",
+                    data: params,
+                    type: "post",
+                    dataType: "json",
+                    contentType: "application/json",
+                    success: function (data) {
+                        if (data.returnCode == "200") {
+                            localStorage.setItem("statResponse", JSON.stringify(data.data));
+                            localStorage.setItem("statRequest", params);
+                            window.location.href = "../../pages/stock/indexResult.html";
+                        }else{
+                            layer.msg("计算错误！");
+                        }
+                    }
+                })
+                return false;
+            });
+        });
+        layui.use('laydate', function(){
+            var laydate = layui.laydate;
+
+            //执行一个laydate实例
+            laydate.render({
+                elem: '#investDate' //指定元素
+            });
+            laydate.render({
+                elem: '#stockDate' //指定元素
+            });
+        });
+    </script>
+</body>
+</html>

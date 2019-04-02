@@ -146,20 +146,20 @@ getAccount();
 //点击事件
 $(function () {
 
+    $("#aboutUs").click(function () {
+        window.location.href = "../pages/aboutUs.html";
+    });
     if(!$.cookie('Authorization')){
         var result = confirm("是否去登录？");
         if(result){
             setTimeout("window.location.href = '../pages/login.html'", 1500);
         }
     }else{
+        $('.wrap-btn').show()
         $("#applyMessage").click(function () {
             window.location.href = "../pages/userApply.html";
         });
-        $("#aboutUs").click(function () {
-            window.location.href = "../pages/aboutUs.html";
-            // greenAlertBox('正在开发中...')
-            // return false
-        });
+
         $("#changePassword").click(function () {
             window.location.href = "../pages/changePassword.html";
         });
@@ -176,8 +176,27 @@ $(function () {
         });
 
         $(".wrap-btn-quit").click(function () {
-            loadingBlue()
-            exitSystem();
+            layui.use('layer', function(){
+                var layer = layui.layer;
+
+                layer.open({
+                    type: 0,
+                    title:'提示',
+                    area: '300px',
+                    content: '确定要退出登录吗', //这里content是一个普通的String
+                    btn: ['取消', '确定'], //可以无限个按钮
+                    yes: function(index, layero){
+                        //do something
+                        layer.close(index); //如果设定了yes回调，需进行手工关闭
+                    },
+                    btn2: function(index, layero){//确定按钮
+                        layer.close(index);
+                        loadingBlue()
+                        exitSystem();
+                    },
+                });
+            });
+
         });
     }
 

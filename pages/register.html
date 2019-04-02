@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <title>用户注册</title>
-
+    <link rel="stylesheet" href="../styles/font/iconfont.css" />
+    <link rel="stylesheet" href="../styles/product/common.css">
     <link rel="stylesheet" href="../styles/common/common.css" />
     <link rel="stylesheet" href="../styles/lib/swiper.css" />
     <link rel="stylesheet" href="../styles/register.css" />
@@ -13,7 +14,12 @@
 
 </head>
 <body>
+
 <div class="wrap">
+    <div class="header" style="position: relative;">
+        <a class="backImg" href="../pages/login.html"><i class="iconfont icon-fanhuizuojiantou"></i>返回</a>
+        <div class=" grayGround">金资服</div>
+    </div>
     <div class="wrap-title">
         <span class="wrap-title-span">注册</span>
     </div>
@@ -28,13 +34,17 @@
             <span class="warp-main-span">登录密码</span>
             <input type="password" placeholder="请填写8-16位字母、数字混合密码" id="password" maxlength="16" class="warp-main-input warp-main-password">
             <p class="warp-main-hr"></p>
-            <span class="warp-main-span">证件号码</span>
-            <input type="input" placeholder="请填写证件号码" id="cardNo" maxlength="30" class="warp-main-input warp-main-password">
+
+            <div class="yzm-row">
+                <span class="warp-main-span">图形验证码</span>
+                <input type="tel" placeholder="请填写图形验证码" id="yzm_img" maxlength="6" class="warp-main-input warp-main-yzm">
+                <img id="imageCode" style="width: auto;" onclick="refreshImageCode()" src="">
+            </div>
             <p class="warp-main-hr"></p>
             <div class="yzm-row">
                 <span class="warp-main-span">短信验证码</span>
                 <input type="tel" onkeyup="value=value.replace(/[^0-9]/g,'')" placeholder="请填写短信验证码" id="yzm" maxlength="6" class="warp-main-input warp-main-yzm">
-                <button class="login-btn-yzm" id="btn-yzm" >发送验证码</button>
+                <button class="login-btn-yzm" style="width: auto;" id="btn-yzm" >发送验证码</button>
             </div>
             <p class="warp-main-hr"></p>
             <span class="warp-main-span">推荐人姓名</span>

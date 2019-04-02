@@ -59,6 +59,8 @@ $(function () {
                 $("#acceptingSide").html(data.acceptingSide);
                 $("#process").html(data.process);
                 $("#desc").html(data.desc);
+                $("#attachmentDesc").html(data.attachmentDesc);
+
 
                 if($.cookie('Authorization')){
                     $(".unLogin").css('display','none');
@@ -102,6 +104,9 @@ $(function () {
                 }
                 $("#attachmentList").html(tbody);
 
+            }
+            if(result.returnCode = "11012"){
+                $("#attachmentList").html("您的等级不足，暂时不能查看相关内容");
             }
         }
     })
