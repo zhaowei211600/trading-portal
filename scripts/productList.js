@@ -248,7 +248,7 @@ function followProduct() {
     }else{
         var result = confirm("是否去登录？");
         if(result){
-            setTimeout("window.location.href = '../pages/login.html'", 1500);
+            window.location.href = '../pages/login.html';
         }
     }
 }
