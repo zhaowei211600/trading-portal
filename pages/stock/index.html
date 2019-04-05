@@ -56,10 +56,10 @@
     </style>
 </head>
 <body>
-    <div class="header">
+    <!--<div class="header">
         <a class="backImg" href="" ><i class="iconfont icon-fanhuizuojiantou"></i>返回</a>
         <div class=" grayGround">金资服</div>
-    </div>
+    </div>-->
     <div class="banner">
         <img src="../../styles/images/banner03.jpg"/>
     </div>
@@ -142,7 +142,6 @@
 
             //监听提交
             form.on('submit(formDemo)', function(data){
-                layer.msg(JSON.stringify(data.field));
                 var params = JSON.stringify(data.field);
                 params.statType = 1;
                 $.ajax({

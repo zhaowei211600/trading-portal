@@ -1,3 +1,5 @@
+//var typeId = '';
+var isFollow = false;
 var productList = {
     init: function(){
         this.loadOK = false;
@@ -7,6 +9,8 @@ var productList = {
         this.searchLayer();
         this.query();
         this.loadMore();
+        checkProduct();
+
     },
     initParams: function(){
         this.params.page = 1;
@@ -22,6 +26,7 @@ var productList = {
         if(window.location.search.substr(1).split("=")[1]) {
             urlParams = JSON.parse(decodeURI(window.location.search.substr(1).split("=")[1]));
             this.params.firstType = urlParams;
+            typeId = urlParams;
         }
     },
     // 弹层
@@ -44,15 +49,17 @@ var productList = {
             $(".search-body").hide();
         });
 
-        $(".email-status .layer-btn-es").on("click", "a", function(){
+        /*$(".email-status .layer-btn-es").on("click", "a", function(){
             $(this).addClass("on").siblings().removeClass("on");
-        });
+        });*/
         $(".check-status .layer-btn-cs").on("click", "a", function(){
             $(this).addClass("on").siblings().removeClass("on");
         });
 
         // 重置
-        $(".reset").click(_this.resetLayer);
+        $(".reset").click(function () {
+            _this.resetLayer
+        });
 
         // 确认
         $(".submit").click(function(){
@@ -63,7 +70,7 @@ var productList = {
             //_this.params.invoiceNumber = $(".search-info .invoiceNumber").val();
 
             $(".content-body ul").html("");
-
+            checkProduct();
             _this.query();
             $("html").css({"overflow": "visible", "height": "auto"});
             $("body").css({"overflow": "visible", "height": "auto"});
@@ -181,4 +188,67 @@ function showFirstType() {
             }
         }
     });
+}
+
+function checkProduct() {
+    var typeId = $(".check-status .layer-btn-cs a").hasClass("on") ? $(".check-status .layer-btn-cs .on").attr("data-checkResult") : "";
+    if($.cookie('Authorization')){
+        $.ajax({
+            url: BASEURL + "/follow/check" ,
+            data: {'typeId':typeId},
+            type: "get",
+            success: function (resultData) {
+                if (resultData.returnCode == 200) {
+                    $("#isFollow").removeClass("icon-weixuanzhong");
+                    $("#isFollow").addClass("icon-yixuanzhong");
+                    $("#isFollow").html("取消关注");
+                    isFollow = true;
+                }else{
+                    $("#isFollow").removeClass("icon-yixuanzhong");
+                    $("#isFollow").addClass("icon-weixuanzhong");
+                    $("#isFollow").html("关注");
+                    isFollow = false;
+                }
+            }
+        });
+    }
+}
+
+function followProduct() {
+    var typeId = $(".check-status .layer-btn-cs a").hasClass("on") ? $(".check-status .layer-btn-cs .on").attr("data-checkResult") : "";
+    var followType = 1;
+    if(isFollow){
+        followType = 2;
+    }
+    if($.cookie('Authorization')){
+        $.ajax({
+            url: BASEURL + "/follow" ,
+            data: {'typeId':typeId,'followType':followType},
+            type: "get",
+            success: function (resultData) {
+                if (resultData.returnCode == 200) {
+                    if(isFollow){
+                        $("#isFollow").removeClass("icon-yixuanzhong");
+                        $("#isFollow").addClass("icon-weixuanzhong");
+                        $("#isFollow").html("关注");
+                        isFollow = false;
+                        greenAlertBox("取消关注成功");
+                    }else{
+                        $("#isFollow").removeClass("icon-weixuanzhong");
+                        $("#isFollow").addClass("icon-yixuanzhong");
+                        $("#isFollow").html("取消关注");
+                        isFollow = true;
+                        greenAlertBox("关注成功");
+                    }
+                }else {
+                    greenAlertBox("操作失败");
+                }
+            }
+        });
+    }else{
+        var result = confirm("是否去登录？");
+        if(result){
+            setTimeout("window.location.href = '../pages/login.html'", 1500);
+        }
+    }
 }

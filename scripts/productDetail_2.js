@@ -1,4 +1,5 @@
 var productId;
+var isFollow = false;
 function GetRequest() {
     var url = location.search; //获取url中"?"符后的字串
     var theRequest = new Object();
@@ -12,8 +13,10 @@ function GetRequest() {
     return theRequest;
 }
 var param = GetRequest();
+productId = param['productId'];
 $(function () {
 
+    checkProduct();
     $('.itemBtn').click(function () {
 
         $('.itemBtn').removeClass('active')
@@ -55,9 +58,35 @@ $(function () {
                 $("#acceptingSide").html(data.acceptingSide);
                 $("#process").html(data.process);
                 $("#tradeDetail").html(data.tradeDetail);
+                $("#productName").html(data.name);
+                if (data.descImg) {
+                    loadingBlue();
+                    $.ajax({
+                        type: "post",
+                        url: BASEURL + '/user/file/download',
+                        data: {'fileName': data.descImg},
+                        contentType: 'application/x-www-form-urlencoded;charset=utf-8',
+                        // dataType: 'json',
+                        async: true,
+                        crossDomain: true == !(document.all),
+                        success: function (data) {
+                            $('.loadingBlue').remove()
+                            if (data.returnCode == 200) {
+                                $('#descImg').attr('src', 'data:image/png;base64,' + data.data)
+                            }
+                        }
+                    });
+                }
+            }
+            if($.cookie('Authorization')){
+                $(".unLogin").css('display','none');
+
+            }else {
+                $(".displayUnLogin").css('display','none');
             }
         }
     })
+
 
     $.ajax({
         url: BASEURL + "/user/type/product?productId="+param['productId'],
@@ -78,15 +107,63 @@ $(function () {
 });
 
 
-/*
+function checkProduct() {
+    if($.cookie('Authorization')){
+        $.ajax({
+            url: BASEURL + "/follow/check" ,
+            data: {'productId':productId},
+            type: "get",
+            success: function (resultData) {
+                if (resultData.returnCode == 200) {
+                    $("#isFollow").removeClass("icon-weixuanzhong");
+                    $("#isFollow").addClass("icon-yixuanzhong");
+                    $("#isFollow").html("取消关注");
+                    isFollow = true;
+                }else{
+                    $("#isFollow").removeClass("icon-yixuanzhong");
+                    $("#isFollow").addClass("icon-weixuanzhong");
+                    $("#isFollow").html("关注");
+                    isFollow = false;
+                }
+            }
+        });
+    }
+}
 
-$(function () {
-    $("#apply").click(function () {
-        if(orderStatus != '2'){
-            greenAlertBox('当前状态无法结项');
-            return false;
-        }else{
-            window.location.href = '../pages/order-apply.html?productId='+param['productId'];
+function followProduct() {
+    var followType = 1;
+    if(isFollow){
+        followType = 2;
+    }
+    if($.cookie('Authorization')){
+        $.ajax({
+            url: BASEURL + "/follow" ,
+            data: {'productId':productId,'followType':followType},
+            type: "get",
+            success: function (resultData) {
+                if (resultData.returnCode == 200) {
+                    if(isFollow){
+                        $("#isFollow").removeClass("icon-yixuanzhong");
+                        $("#isFollow").addClass("icon-weixuanzhong");
+                        $("#isFollow").html("关注");
+                        isFollow = false;
+                        greenAlertBox("取消关注成功");
+                    }else{
+                        $("#isFollow").removeClass("icon-weixuanzhong");
+                        $("#isFollow").addClass("icon-yixuanzhong");
+                        $("#isFollow").html("取消关注");
+                        isFollow = true;
+                        greenAlertBox("关注成功");
+                    }
+                }else {
+                    greenAlertBox("操作失败");
+                }
+            }
+        });
+    }else{
+        var result = confirm("是否去登录？");
+        if(result){
+            setTimeout("window.location.href = '../pages/login.html'", 1500);
         }
-    });
-});*/
+    }
+}

@@ -1,4 +1,5 @@
 var productId;
+var isFollow = false;
 function GetRequest() {
     var url = location.search; //获取url中"?"符后的字串
     var theRequest = new Object();
@@ -12,7 +13,9 @@ function GetRequest() {
     return theRequest;
 }
 var param = GetRequest();
+productId = param['productId'];
 $(function () {
+    checkProduct();
     $('.itemBtn').click(function () {
         $('.itemBtn').removeClass('active')
         $(this).addClass('active')
@@ -40,6 +43,11 @@ $(function () {
                 $('.maginBottom:eq(3)').removeClass('hidden')
                 break;
             }
+            case '4':
+            {
+                $('.maginBottom:eq(4)').removeClass('hidden')
+                break;
+            }
         }
     })
     $.ajax({
@@ -50,6 +58,7 @@ $(function () {
         success: function(result) {
             if (result.returnCode == "200") {
                 var data = result.data;
+                $("#productName").html(data.name);
                 $("#productId").html(data.productId);
                 $("#type").html(data.firstTypeName +"-"+ data.secondTypeName);
                 $("#budget").html(data.budget);
@@ -57,7 +66,6 @@ $(function () {
                 $("#area").html(data.area);
 
                 $("#acceptingSide").html(data.acceptingSide);
-                $("#process").html(data.process);
                 $("#desc").html(data.desc);
                 $("#attachmentDesc").html(data.attachmentDesc);
 
@@ -65,8 +73,29 @@ $(function () {
                 if($.cookie('Authorization')){
                     $(".unLogin").css('display','none');
                     $("#tradeDetail").html(data.tradeDetail);
-                }
+                    $("#process").html(data.process);
+                }else {
 
+                    $(".displayUnLogin").css('display','none');
+                }
+                if (data.descImg) {
+                    loadingBlue();
+                    $.ajax({
+                        type: "post",
+                        url: BASEURL + '/user/file/download',
+                        data: {'fileName': data.descImg},
+                        contentType: 'application/x-www-form-urlencoded;charset=utf-8',
+                        // dataType: 'json',
+                        async: true,
+                        crossDomain: true == !(document.all),
+                        success: function (data) {
+                            $('.loadingBlue').remove()
+                            if (data.returnCode == 200) {
+                                $('#descImg').attr('src', 'data:image/png;base64,' + data.data)
+                            }
+                        }
+                    });
+                }
             }
         }
     })
@@ -112,3 +141,63 @@ $(function () {
     })
 });
 
+function checkProduct() {
+    if($.cookie('Authorization')){
+        $.ajax({
+            url: BASEURL + "/follow/check" ,
+            data: {'productId':productId},
+            type: "get",
+            success: function (resultData) {
+                if (resultData.returnCode == 200) {
+                    $("#isFollow").removeClass("icon-weixuanzhong");
+                    $("#isFollow").addClass("icon-yixuanzhong");
+                    $("#isFollow").html("取消关注");
+                    isFollow = true;
+                }else{
+                    $("#isFollow").removeClass("icon-yixuanzhong");
+                    $("#isFollow").addClass("icon-weixuanzhong");
+                    $("#isFollow").html("关注");
+                    isFollow = false;
+                }
+            }
+        });
+    }
+}
+
+function followProduct() {
+    var followType = 1;
+    if(isFollow){
+        followType = 2;
+    }
+    if($.cookie('Authorization')){
+        $.ajax({
+            url: BASEURL + "/follow" ,
+            data: {'productId':productId,'followType':followType},
+            type: "get",
+            success: function (resultData) {
+                if (resultData.returnCode == 200) {
+                    if(isFollow){
+                        $("#isFollow").removeClass("icon-yixuanzhong");
+                        $("#isFollow").addClass("icon-weixuanzhong");
+                        $("#isFollow").html("关注");
+                        isFollow = false;
+                        greenAlertBox("取消关注成功");
+                    }else{
+                        $("#isFollow").removeClass("icon-weixuanzhong");
+                        $("#isFollow").addClass("icon-yixuanzhong");
+                        $("#isFollow").html("取消关注");
+                        isFollow = true;
+                        greenAlertBox("关注成功");
+                    }
+                }else {
+                    greenAlertBox("操作失败");
+                }
+            }
+        });
+    }else{
+        var result = confirm("是否去登录？");
+        if(result){
+            setTimeout("window.location.href = '../pages/login.html'", 1500);
+        }
+    }
+}

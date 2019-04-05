@@ -111,11 +111,12 @@ body{
     flex-direction: row;
     /*justify-content: space-between;*/
     flex-wrap: wrap;
+    left:10px;
 
 }
 .content > div{
     width: 114px;
-    padding: 15px 0 10px;
+    padding: 10px 53px 5px;
 }
 .content-item{
     margin: 0 auto;

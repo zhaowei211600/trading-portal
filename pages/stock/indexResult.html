@@ -70,10 +70,10 @@
     </style>
 </head>
 <body>
-<div class="header">
+<!--<div class="header">
     <a class="backImg" href="../../pages/stock/index.html" ><i class="iconfont icon-fanhuizuojiantou"></i>返回</a>
     <div class=" grayGround">金资服</div>
-</div>
+</div>-->
     <div class="layui-collapse">
         <div class="layui-colla-item" style="margin-top: 55px">
             <h2 class="layui-colla-title">减持数据</h2>
@@ -100,7 +100,7 @@
                         <li><span id="listUnitPrice"></span>    元</li>
                         <li><span id="reductionQuantity"></span>    股</li>
                         <li><span id="reductionUnitPrice"></span>   元</li>
-                        <!--<li class="red company">25%</li>-->
+                        <li class="red company">25%</li>
                         <li class="person">20%</li>
                     </ul>
                 </div>
@@ -130,9 +130,10 @@
                     <li><span id="otherTax"></span>元（印花税等）</li>
                     <li><span id="tax"></span>元</li>
                     <li><span id="acceptTax"></span>    元</li>
-                    <li class="company" id="partnerAmount"><span></span>    元</li>
+                    <li class="company" id="corpRealAmount"><span></span>    元</li>
                     <li class="company" id="partnerTax"><span></span>    元</li>
-                    <li><span id="realAmount"></span>   元</li>
+                    <li class="company" id="partnerAmount"><span></span>    元</li>
+                    <li class="person"><span id="realAmount"></span>   元</li>
                 </ul>
             </div>
         </div>
@@ -152,10 +153,10 @@
         </div>
         <div>
             <ul>
-                <li><span class="partnerAmount">700000.00</span>   元</li>
-                <li><span class="realAmount">700000.00</span>元</li>
-                <li><span class="optimizeAmount">24.45</span>    元</li>
-                <li><span>24.45</span>    元</li>
+                <li><span class="corpOptimizeRealAmount">0.00</span>   元</li>
+                <li><span class="partnerAmount">0.00</span>元</li>
+                <li><span class="optimizeAmount">0.00</span>    元</li>
+                <li><span class="partnerOptimizeAmount">0.00</span>    元</li>
 
             </ul>
         </div>
@@ -174,8 +175,8 @@
         </div>
         <div>
             <ul>
-                <li><span class="realAmount">700000.00</span>   元</li>
-                <li><span class="optimizeAmount">700000.00</span>元 <div class="red f12">(含增值税返还)</div> </li>
+                <li><span class="realAmount">0.00</span>   元</li>
+                <li><span class="optimizeAmount">0.00</span>元 <div class="red f12">(含增值税返还)</div> </li>
             </ul>
         </div>
     </div>
@@ -259,6 +260,7 @@
                 $('#acceptTax').html(responseData.personTax)
             }else if(requestData.corpType == '2'){//有限责任公司
                 $('#acceptTax').html(responseData.corpTax)
+                $('#corpRealAmount').html(responseData.corpRealAmount)
             }
 
 
@@ -290,7 +292,6 @@
                     dataType: "json",
                     contentType: "application/json",
                     success: function (resp) {
-                        console.log(resp)
                         layer.close(index)
                         if(resp.returnCode == '200'){
                             $('#popBox').hide()
@@ -303,14 +304,16 @@
                             }else if(requestData.corpType == '2'){//有限责任公司
                                 $('#companyOptimize').show()
                                 $('#personOptimize').hide()
-                                $('.realAmount').html(resp.data.realAmount)
+                                $('.corpOptimizeRealAmount').html(resp.data.corpOptimizeRealAmount)
                                 $('.partnerAmount').html(resp.data.partnerAmount)
                                 $('.optimizeAmount').html(resp.data.optimizeAmount)
+                                $('.partnerOptimizeAmount').html(resp.data.partnerOptimizeAmount)
+
 
                             }
+                        }else{
+                            layer.msg(resp.returnMessage);
                         }
-
-
                     }
                 })
             });

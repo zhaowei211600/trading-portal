@@ -6,45 +6,52 @@
     <link rel="stylesheet" href="../styles/common/common.css" />
     <link rel="stylesheet" href="../styles/font/iconfont.css" />
     <link rel="stylesheet" href="../styles/assetsManage.css" />
-    <title>产品列表</title>
+    <title>金资服</title>
 </head>
 <body>
 <div class="content-wrap my-asset-i">
     <!--顶部导航搜索-->
     <div class="top-search">
-        <div class="search-bar">
-           <!-- <a href="../pages/userCenter.html.html"class="s-back"><i class="iconfont icon-fanhuizuojiantou"></i>返回</a>-->
-            <a href="javascript:void(0);"class="s-btn"><i class="iconfont icon-shaixuan"></i></a>
+        <div class="search-bar" style="display: flex;flex-direction: row;justify-content: space-between;padding: 0 15px;">
+            <a href="../pages/home.html" style="font-size: 14px;color: #485166;"><i class="iconfont icon-fanhuizuojiantou"></i>返回</a >
+            <div style="font-size: 16px;font-weight: bolder;">产品列表</div>
+            <a href="#" style="font-size: 14px;color: #485166;" onclick="followProduct()"><i id="isFollow" class="iconfont icon-weixuanzhong">关注</i></a>
         </div>
-        <div class="search-body">
-            <div class="layer-close"></div>
-            <div class="s-content">
-                <!--<div class="email-status">
-                    <div class="layer-title"><i class="iconfont icon-weibiaoti-"></i>邮箱状态</div>
-                    <div class="layer-btn-es">
-                        <a href="javascript:void(0);" class="email-ok" data-sendStatus="1">已发邮件</a>
-                        <a href="javascript:void(0);" class="email-un" data-sendStatus="0">未发邮件</a>
+        <div class="top-search" style="top: 45px;">
+            <div class="search-bar">
+                <!-- <a href="../pages/userCenter.html.html"class="s-back"><i class="iconfont icon-fanhuizuojiantou"></i>返回</a >-->
+                <a href="javascript:void(0);"class="s-btn"><i class="iconfont icon-shaixuan"></i></a >
+            </div>
+            <div class="search-body">
+                <div class="layer-close"></div>
+                <div class="s-content">
+                    <!--<div class="email-status">
+                        <div class="layer-title"><i class="iconfont icon-weibiaoti-"></i>邮箱状态</div>
+                        <div class="layer-btn-es">
+                            <a href="javascript:void(0);" class="email-ok" data-sendStatus="1">已发邮件</a >
+                            <a href="javascript:void(0);" class="email-un" data-sendStatus="0">未发邮件</a >
+                        </div>
                     </div>
-                </div>
-                <div class="check-status">
-                    <div class="layer-title"><i class="iconfont icon-heduixinxi"></i>核对状态</div>
-                    <div class="layer-btn-cs">
-                        <a href="javascript:void(0);" class="check-ok" data-checkResult="2">已通过</a>
-                        <a href="javascript:void(0);" class="check-un" data-checkResult="0">未核对</a>
-                        <a href="javascript:void(0);" class="check-no" data-checkResult="1">未通过</a>
+                    <div class="check-status">
+                        <div class="layer-title"><i class="iconfont icon-heduixinxi"></i>核对状态</div>
+                        <div class="layer-btn-cs">
+                            <a href="javascript:void(0);" class="check-ok" data-checkResult="2">已通过</a >
+                            <a href="javascript:void(0);" class="check-un" data-checkResult="0">未核对</a >
+                            <a href="javascript:void(0);" class="check-no" data-checkResult="1">未通过</a >
+                        </div>
+                    </div>-->
+                    <div class="search-info">
+                        <div><span>项目名称</span><input type="text" class="productName" placeholder="请输入项目名称" /></div>
                     </div>
-                </div>-->
-                <div class="search-info">
-                    <div><span>项目名称</span><input type="text" class="productName" placeholder="请输入项目名称" /></div>
-                </div>
-                <div class="check-status">
-                    <div class="layer-title"><i class="iconfont icon-heduixinxi"></i>项目类型</div>
-                    <div class="layer-btn-cs" id="typeList">
+                    <div class="check-status">
+                        <div class="layer-title"><i class="iconfont icon-heduixinxi"></i>项目类型</div>
+                        <div class="layer-btn-cs" id="typeList">
+                        </div>
                     </div>
-                </div>
-                <div class="search-ctrl">
-                    <a href="javascript:void(0);" class="reset">重置</a>
-                    <a href="javascript:void(0);" class="submit">确认</a>
+                    <div class="search-ctrl">
+                        <a href="javascript:void(0);" class="reset">重置</a >
+                        <a href="javascript:void(0);" class="submit">确认</a >
+                    </div>
                 </div>
             </div>
         </div>
@@ -55,7 +62,7 @@
         <div class="empty-msg">暂无产品</div>
     </div>
     <!--数据列表-->
-    <div class="content-body">
+    <div class="content-body" style="padding-top: 40px;">
         <ul></ul>
         <div class="load-more">加载更多</div>
     </div>

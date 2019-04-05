@@ -4,20 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
-    <title>资金交易</title>
+    <title>金资服</title>
     <link rel="stylesheet" href="../styles/font/iconfont.css" />
     <link rel="stylesheet" href="../styles/product/common.css">
+    <link rel="stylesheet" href="../styles/font/iconfont.css" />
     <link rel="stylesheet" href="../styles/product/productDetail.css">
 </head>
 <body>
 <div class="header">
-    <a class="backImg" onclick="window.history.go(-1); "  ><i class="iconfont icon-fanhuizuojiantou"></i>返回</a>
-    <div class=" grayGround">金资服</div>
+    <a class="backImg" onclick="window.history.go(-1); "><i class="iconfont icon-fanhuizuojiantou"></i>返回</a>
+    <div class=" grayGround" id="productName"></div>
 </div>
 
 
 <div class="banner">
-    <img src="../styles/images/baner.jpg"/>
+    <img id="descImg" src="" />
 </div>
 
 <div class="listItem">
@@ -25,6 +26,7 @@
     <div class="itemBtn" title="1">基本交易信息</div>
     <div class="itemBtn" title="2">详细交易信息</div>
     <div class="itemBtn" title="3">交易方资料</div>
+    <div class="itemBtn" title="4">业务进展</div>
 </div>
 <!--第一部分-->
 <div class="maginBottom">
@@ -77,10 +79,6 @@
                 <div style="white-space: nowrap">所在地区：</div>
                 <div id="area"></div>
             </div>
-            <div class="flex">
-                <div>项目进展：</div>
-                <div id="process"></div>
-            </div>
         </div>
     </div>
     <div class="f14 padd">
@@ -99,11 +97,11 @@
 <div class="maginBottom hidden" >
 
     <div class="f14 padd">
-        <div class="flex" style="margin-bottom: 0.05rem;">
+        <div class="flex displayUnLogin" style="margin-bottom: 0.05rem;">
             <div class="line"></div>
             <div style="font-weight: bolder;margin-left: 0.05rem;">详细信息</div>
         </div>
-        <div id="tradeDetail">
+        <div id="tradeDetail" class="displayUnLogin">
 
         </div>
         <div class="unLogin" style="margin-top: 0.8rem;">您还未登录，请登录后查看</div>
@@ -114,7 +112,7 @@
 
 <!--第四部分-->
 <div class="maginBottom hidden" >
-    <div class="f14 padd">
+    <div class="f14 padd displayUnLogin">
         <div class="flex" style="margin-bottom: 0.05rem;">
             <div class="line"></div>
             <div style="font-weight: bolder;margin-left: 0.05rem;">项目资料</div>
@@ -124,20 +122,39 @@
         </div>
     </div>
     <div class="f14 padd">
-        <div class="flex" style="margin-bottom: 0.05rem;">
+        <div class="flex displayUnLogin" style="margin-bottom: 0.05rem;">
             <div class="line"></div>
             <div style="font-weight: bolder;margin-left: 0.05rem;">项目信息</div>
         </div>
-        <div id="attachmentList">
+        <div id="attachmentList" class="displayUnLogin">
 
         </div>
+        <div class="unLogin" style="margin-top: 0.8rem;">您还未登录，请登录后查看</div>
+        <div class="unLogin"> 更详细的项目信息</div>
+        <div class="loginBtn unLogin" onclick="window.location.href = 'login.html'">去登录</div>
     </div>
 </div>
 
+<!--第五部分-->
+<div class="maginBottom hidden" >
+
+    <div class="f14 padd">
+        <div class="flex displayUnLogin" style="margin-bottom: 0.05rem;">
+            <div class="line"></div>
+            <div style="font-weight: bolder;margin-left: 0.05rem;">项目进展</div>
+        </div>
+        <div id="process" class="displayUnLogin">
+
+        </div>
+        <div class="unLogin" style="margin-top: 0.8rem;">您还未登录，请登录后查看</div>
+        <div class="unLogin"> 更详细的项目信息</div>
+        <div class="loginBtn unLogin" onclick="window.location.href = 'login.html'">去登录</div>
+    </div>
+</div>
 
 <div class="footer">
     <div>分享</div>
-    <div>预约</div>
+    <div onclick="followProduct()"><i id="isFollow" class="iconfont icon-weixuanzhong">关注</i></div>
 </div>
 
 <script type="text/javascript" src="../scripts/lib/jquery-3.2.1.min.js"></script>
