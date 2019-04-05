@@ -176,7 +176,14 @@ $(function () {
         });
 
         $(".wrap-btn-quit").click(function () {
-            layui.use('layer', function(){
+
+            var result = confirm("是否去登录？");
+            if(result){
+                loadingBlue();
+                exitSystem();
+            }
+
+            /*layui.use('layer', function(){
                 var layer = layui.layer;
 
                 layer.open({
@@ -195,7 +202,7 @@ $(function () {
                         exitSystem();
                     },
                 });
-            });
+            });*/
 
         });
     }
