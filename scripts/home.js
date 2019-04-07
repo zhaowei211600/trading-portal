@@ -93,22 +93,25 @@ var walletList = {
                             productType = '卖方';
                         }
                         dataHTML +=
-                            "<li style=\"margin-bottom: 10px;margin-top: 0;padding: 10px 15px;border: none;background: white;\" onclick='showDetail("+item.id+","+item.productType+")'>" +
-                            "                <div>" +
+                            "<li style=\"margin-bottom: 10px;margin-top: 0;padding: 10px 15px;border: none;background: white;display: flex;flex-direction: row;\" onclick='showDetail("+item.id+","+item.productType+")'>" +
+                            "<div>" +
+                            "    <img style=\"width: 95px;height: 80px;\" src=\"../styles/images/banner1.jpg\"/>\n" +
+                            "</div>"+
+                            "                <div style='margin-left: 15px;flex: 1;'>" +
                             "                    <div style=\"font-size: 16px;\">" +
                             "                        <span>"+item.name+"</span>" +
                             "                    </div>" +
                             "                    <div style=\"padding-top: 5px;\">" +
-                            "                        预算：<span style=\"color: red;\">￥"+item.budget+"</span>" +
+                            "                        <span style=\"color: red;\">￥"+item.budget+"</span>" +
                             "                    </div>" +
                             "                    <div style=\"padding-top: 5px;color: #999999;\">\n" + item.createTime +
-                            "                           <span style=\"font-size: 12px;color: #999999;float: right;\">"+productType+"</span>"+
+                            "                           <span style=\"font-size: 12px;color: #999999;margin-left:150px;\">"+productType+"</span>"+
                             "                    </div>" +
                             "                    <div style=\"padding-top: 5px;color: #999999;\">" + item.area + "</div>" +
                             "                </div>" +
                             "            </li>";
                     });
-                    $(".content-body ul").append(dataHTML);
+                     $(".content-body ul").append(dataHTML);
                 };
                 if(mapData.length <= 0 && $(".content-body ul").children().length<=0 ){
                     $(".content-wrap .content-body").hide();

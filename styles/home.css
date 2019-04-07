@@ -4,6 +4,7 @@ body{
 .home-search-body{
     overflow-x: scroll;
     background-color: #ffffff;
+    margin-top: 10px;
 }
 .home-search-body::-webkit-scrollbar {display:none}
 .home-search-body ul{
@@ -16,7 +17,7 @@ body{
     white-space: nowrap;
 }
 .home-search-body .active{
-    color: #1db31d;
+    /*color: #1db31d;*/
     display: block;
 }
 .greenline{
@@ -109,14 +110,14 @@ body{
     background-color: #ffffff;
     display: flex;
     flex-direction: row;
-    /*justify-content: space-between;*/
+    justify-content: space-between;
     flex-wrap: wrap;
     left:10px;
 
 }
 .content > div{
     width: 114px;
-    padding: 10px 53px 5px;
+    padding: 10px 53px;
 }
 .content-item{
     margin: 0 auto;
@@ -131,5 +132,5 @@ body{
     display: flex;
     flex-direction: column;
     justify-content: center;
-
+    margin-left: -25px;
 }

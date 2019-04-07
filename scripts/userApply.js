@@ -95,7 +95,7 @@ function subAuth(params) {
         success: function (data) {
             //console.log(resultData);
             if (data.returnCode == '200') {
-                window.location.href = "/wechat/src/pages/userApplyNext.html";
+                window.location.href = "../pages/userApplyEnd.html";
                 $('.loadingBlue').remove();
             } else {
                 // window.location.href = "/wechat/src/pages/userApplyFail.html";
@@ -107,12 +107,13 @@ function subAuth(params) {
 }
 
 // 认证返回操作
+/*
 +(function(){
     console.log(window.location.search.substr("1").split("="));
     if(window.location.search.substr("1").split("=")[1] == "login") {
         $(".approveBack").click(function(e){
             e.preventDefault();
-            window.location.href = "../pages/assetsManage.html";
+            window.location.href = "../pages/userCenter.html";
         })
     }
-})();
+})();*/

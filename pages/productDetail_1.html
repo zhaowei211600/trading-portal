@@ -7,7 +7,6 @@
     <title>金资服</title>
     <link rel="stylesheet" href="../styles/font/iconfont.css" />
     <link rel="stylesheet" href="../styles/product/common.css">
-    <link rel="stylesheet" href="../styles/font/iconfont.css" />
     <link rel="stylesheet" href="../styles/product/productDetail.css">
 </head>
 <body>
@@ -21,12 +20,11 @@
     <img id="descImg" src="" />
 </div>
 
-<div class="listItem">
-    <div class="active itemBtn"title="0">产品介绍</div>
-    <div class="itemBtn" title="1">基本交易信息</div>
-    <div class="itemBtn" title="2">详细交易信息</div>
-    <div class="itemBtn" title="3">交易方资料</div>
-    <div class="itemBtn" title="4">业务进展</div>
+<div style="overflow-x: scroll;">
+    <div class="listItem">
+        <div class="active itemBtn"title="0">产品介绍</div><div class="itemBtn" title="1">
+        基本交易信息</div><div class="itemBtn" title="2">详细交易信息</div><div class="itemBtn" title="3">交易方资料</div><div class="itemBtn" title="4">业务进展</div>
+    </div>
 </div>
 <!--第一部分-->
 <div class="maginBottom">
@@ -124,7 +122,7 @@
     <div class="f14 padd">
         <div class="flex displayUnLogin" style="margin-bottom: 0.05rem;">
             <div class="line"></div>
-            <div style="font-weight: bolder;margin-left: 0.05rem;">项目信息</div>
+            <div style="font-weight: bolder;margin-left: 0.05rem;">附件</div>
         </div>
         <div id="attachmentList" class="displayUnLogin">
 
@@ -153,8 +151,13 @@
 </div>
 
 <div class="footer">
-    <div>分享</div>
-    <div onclick="followProduct()"><i id="isFollow" class="iconfont icon-weixuanzhong">关注</i></div>
+    <div onclick="addBackGround()"><img style="width: 20px;position: relative;top: 5px;" src="../styles/images/share.png"/>分享</div>
+    <div onclick="followProduct()"><img style="width: 22px;position: relative;top: 5px;" src="../styles/images/star.png"/>关注</div>
+</div>
+
+<div class="shareBack isShowShare"></div>
+<div class="shareLoading isShowShare">
+    <img style="width: 100%;" src="../styles/images/share-loading.jpeg"/>
 </div>
 
 <script type="text/javascript" src="../scripts/lib/jquery-3.2.1.min.js"></script>

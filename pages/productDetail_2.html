@@ -17,14 +17,16 @@
 
 
 <div class="banner">
-    <img id="descImg" src="../styles/images/baner.jpg"/>
+    <img id="descImg" src=""/>
 </div>
 
-<div class="listItem">
-    <div class="active itemBtn" title="0">产品介绍</div>
-    <div class="itemBtn" title="1">承接方信息</div>
-    <div class="itemBtn" title="2">业务进展</div>
-    <div class="itemBtn" title="3">详细信息及分润</div>
+<div style="overflow-x: scroll;">
+    <div class="listItem">
+        <div class="active itemBtn"title="0">产品介绍</div>
+        <div class="itemBtn" title="1">承接方信息</div>
+        <div class="itemBtn" title="2">业务进展</div>
+        <div class="itemBtn" title="3">详细信息及分润</div>
+    </div>
 </div>
 <div class="itemText">
     <div class="f14 detail">
@@ -84,8 +86,13 @@
 
 
 <div class="footer">
-    <div>分享</div>
-    <div onclick="followProduct()"><i id="isFollow" class="iconfont icon-weixuanzhong">关注</i></div>
+    <div onclick="addBackGround()"><img style="width: 20px;position: relative;top: 5px;" src="../styles/images/share.png"/>分享</div>
+    <div onclick="followProduct()"><img style="width: 22px;position: relative;top: 5px;" src="../styles/images/star.png"/>关注</div>
+</div>
+
+<div class="shareBack isShowShare"></div>
+<div class="shareLoading isShowShare">
+    <img style="width: 100%;" src="../styles/images/share-loading.jpeg"/>
 </div>
 
 <script type="text/javascript" src="../scripts/lib/jquery-3.2.1.min.js"></script>

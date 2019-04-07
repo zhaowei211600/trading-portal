@@ -19,10 +19,12 @@
 }
 
 .warp-main .warp-main-span {
-    margin: 3rem 0 0 4%;
+    margin: 0.7rem 0 0 4%;
     font-size: 1.6rem;
     color: #485166;
     letter-spacing: 0;
+    display: inline-block;
+    width: 95px;
 }
 
 .warp-main .warp-main-input {
@@ -54,23 +56,11 @@ input:-ms-input-placeholder { /* Internet Explorer 10+ */
     color: #BBBBBB;
 }
 
-.warp-main-phone {
-    margin-left: 12%;
-}
-.warp-main-yzm {
-    margin-left: 4.5%;
-    width: 37%;
-}
-.warp-main-password {
-    margin-left: 8%;
-}
-.warp-main-newPassword {
-    margin-left: 16.4%;
-}
+
 /* hr样式 */
 .warp-main .warp-main-hr {
     width: 92%;
-    margin: 1rem auto;
+    margin: 0.7rem auto;
     border-top: 1px solid #E9EAEC;
     font-size: 0;
     line-height: 0;
@@ -91,13 +81,13 @@ input:-ms-input-placeholder { /* Internet Explorer 10+ */
 /* 发送验证码 */
 .login-btn-yzm{
     float: right;
-    margin-top: -0.5rem;
+    margin-top: -0.2rem;
     margin-right: 5%;
     background: red;
     border-radius: 5px;
     border: 0;
-    width: 28%;
-    height: 3rem;
+    width: 25%;
+    height: 2.7rem;
     font-size: 1.2rem;
     color: #fff;
     letter-spacing: 0;
@@ -239,4 +229,9 @@ input:-ms-input-placeholder { /* Internet Explorer 10+ */
 }
 .ju{
     color: rgb(247,105,106)
+}
+.yzm-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }

@@ -79,7 +79,7 @@ $(function () {
                     $(".displayUnLogin").css('display','none');
                 }
                 if (data.descImg) {
-                    loadingBlue();
+                    //loadingBlue();
                     $.ajax({
                         type: "post",
                         url: BASEURL + '/user/file/download',
@@ -89,7 +89,7 @@ $(function () {
                         async: true,
                         crossDomain: true == !(document.all),
                         success: function (data) {
-                            $('.loadingBlue').remove()
+                            //$('.loadingBlue').remove()
                             if (data.returnCode == 200) {
                                 $('#descImg').attr('src', 'data:image/png;base64,' + data.data)
                             }
@@ -139,6 +139,10 @@ $(function () {
             }
         }
     })
+
+    $('.isShowShare').click(function () {
+        $('.isShowShare').hide()
+    })
 });
 
 function checkProduct() {
@@ -181,23 +185,21 @@ function followProduct() {
                         $("#isFollow").addClass("icon-weixuanzhong");
                         $("#isFollow").html("关注");
                         isFollow = false;
-                        greenAlertBox("取消关注成功");
                     }else{
                         $("#isFollow").removeClass("icon-weixuanzhong");
                         $("#isFollow").addClass("icon-yixuanzhong");
                         $("#isFollow").html("取消关注");
                         isFollow = true;
-                        greenAlertBox("关注成功");
                     }
-                }else {
-                    greenAlertBox("操作失败");
                 }
             }
         });
     }else{
-        var result = confirm("是否去登录？");
-        if(result){
-            setTimeout("window.location.href = '../pages/login.html'", 1500);
-        }
+        window.location.href = '../pages/login.html';
+
     }
+}
+function addBackGround() {
+    $('.isShowShare').show()
+
 }

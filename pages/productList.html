@@ -15,7 +15,7 @@
         <div class="search-bar" style="display: flex;flex-direction: row;justify-content: space-between;padding: 0 15px;">
             <a href="../pages/home.html" style="font-size: 14px;color: #485166;"><i class="iconfont icon-fanhuizuojiantou"></i>返回</a >
             <div style="font-size: 16px;">产品列表</div>
-            <a href="#" style="font-size: 14px;color: #485166;" onclick="followProduct()"><i id="isFollow" class="iconfont icon-weixuanzhong">关注</i></a>
+            <a href="#" style="font-size: 14px;color: #485166;" onclick="followProduct()"><img id="followImg" style="width: 20px;position: relative;top: -2px;" src="../styles/images/star.png"/><span id="isFollow">关注</span></a>
         </div>
         <div class="top-search" style="top: 45px;">
             <div class="search-bar">
@@ -63,18 +63,21 @@
     </div>
     <!--数据列表-->
     <div class="content-body" style="padding-top: 40px;">
-        <ul></ul>
+        <ul style="line-height: 17px;"></ul>
         <div class="load-more">加载更多</div>
     </div>
     <!--菜单-->
     <div class="menu">
         <div class="menu1">
-            <div class="home" id="assets_manage">首页</div>
+            <div><img style="width: 27px;" src="../styles/images/Home.png"/></div>
+            <div class="home" id="home">首页</div>
         </div>
-        <div class="menu2 bg">
+        <div class="menu2">
+            <div><img style="width: 27px;" src="../styles/images/Menu(1).png"/></div>
             <div class="product_list" id="productList">产品</div>
         </div>
         <div class="menu3">
+            <div><img style="width: 27px;" src="../styles/images/UserProfile.png"/></div>
             <div class="user_center" id="user_center">我的</div>
         </div>
     </div>

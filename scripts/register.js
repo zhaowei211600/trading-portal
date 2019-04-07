@@ -17,10 +17,10 @@ $(function () {
         passcheck =  checkPassword(password);
         captcha = $("#yzm").val();
         realName = $("#realName").val();
-        cardNo = $("#cardNo").val();
+        //cardNo = $("#cardNo").val();
         recommender = $("#recommender").val();
         recommenderPhone = $("#recommenderPhone").val();
-        imageCode = $("#imageCode").val();
+        imageCode = $("#yzm_img").val();
 
         phonecheck = checkPhone(phone,1,passcheck,password,captcha);
         if(!phonecheck) {
@@ -39,7 +39,6 @@ $(function () {
         form.append("phone", phone);
         form.append("password", password);
         form.append("messageCode", captcha);
-        form.append("cardNo", cardNo);
         form.append("realName", realName);
         form.append("imageCode", imageCode);
 

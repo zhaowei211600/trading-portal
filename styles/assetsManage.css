@@ -126,15 +126,15 @@ ul, li, div, a, span, p{
     font-size: 1.8rem;
     color: #495060;
     letter-spacing: 0;
+    display: flex;
+    flex-direction: column;
 }
-.menu .bg {
-    background: #E9EAEC;
-}
+
 .menu .menu1 div, .menu .menu2 div, .menu .menu3 div {
     /* width: 100%; */
-    height: 4rem;
-    line-height: 4rem;
-    font-size: 1.6rem;
+    height: 2.5rem;
+    line-height: 2.2rem;
+    font-size: 12px;
     text-align: center;
     color: #495060;
 }
@@ -856,7 +856,7 @@ ul, li, div, a, span, p{
 .content-wrap .search-body .layer-title .icon-weibiaoti-,
 .content-wrap .search-body .layer-title .icon-heduixinxi{
     font-size: 20px;
-    color:#0080CC;
+    color:red;
     vertical-align: middle;
     margin-right:7px;
 }
@@ -872,15 +872,15 @@ ul, li, div, a, span, p{
     line-height: 30px;
     font-size: 1.2rem;
     text-align: center;
-    color: #0080CC;
+    color: red;
     background-color: white;
-    border: 1px solid #0080CC;
+    border: 1px solid red;
     border-radius: 5px;
     box-sizing: border-box;
 }
 .content-wrap .search-body div[class^="layer-btn"] .on{
     color: white;
-    background: #0080CC;
+    background: red;
 }
 .content-wrap .search-body div[class^="layer-btn"]:after{
     display: block;
@@ -959,18 +959,18 @@ ul, li, div, a, span, p{
     font-size: 1.6rem;
     text-align: center;
     border-radius: 5px;
-    border: 1px solid #0080CC;
+    border: 1px solid red;
     box-shadow: 0 1px 4px 0 rgba(0,0,0,0.10);
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
-.content-wrap .search-body .search-ctrl .reset{
+.content-wrap .search-body .search-ctrl .reset {
     color: white;
-    background-color: #0080CC;
+    background-color: red;
 }
 .content-wrap .search-body .search-ctrl .submit{
-    color: #0080CC;
+    color: red;
     background-color: white;
 }
 .content-wrap .search-body .search-ctrl a:last-child{

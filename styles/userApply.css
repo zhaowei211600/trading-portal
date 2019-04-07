@@ -9,18 +9,20 @@
 }
 .warp-main-white {
     width: 100%;
-    height: 4.4rem;
-    line-height: 4.4rem;
+    height: 4rem;
+    line-height: 4rem;
     background: #fff;
     box-shadow: 0 1px 1px 0 rgba(0,0,0,0.01);
     border-top: 1px solid #E9EAEC;
     border-bottom: 1px solid #E9EAEC;
 }
 .warp-main-span {
-    margin: 3rem 0 0 4%;
+    margin-left: 4%;
     font-size: 1.6rem;
     color: #485166;
     letter-spacing: 0;
+    display: inline-block;
+    width: 95px;
 }
 
 .warp-main-input {
@@ -31,16 +33,7 @@
     border: 0;
     background: #FFFFFF;
 }
-.warp-main-phone {
-    margin-left: 2.2rem;
-}
-.warp-main-yzm {
-    margin-left: 2rem;
-    width: 11.2rem;
-}
-.warp-main-password {
-    margin-left: 3.3rem;
-}
+
 .wrap-companyImg{
     width: 84%;
     height: 18.9rem;

@@ -34,6 +34,9 @@ function getAccount() {
                 var approveState = infoData.authStatus;
                 if (approveState == 1) {
                     $('#authResult').text("认证审核中");
+                    $("#applyMessage").click(function () {
+                        window.location.href = "../pages/userApplyEnd.html";
+                    });
                 }else if(approveState == 2){
                     $('#authResult').text("认证通过");
                     $("#applyMessage").click(function () {
@@ -47,7 +50,7 @@ function getAccount() {
                 }else{
                     $('#authResult').text("未认证");
                     $("#applyMessage").click(function () {
-                        window.location.href = "../pages/userApplyEnd.html";
+                        window.location.href = "../pages/userApply.html";
                     });
                 }
 
@@ -149,63 +152,74 @@ $(function () {
     $("#aboutUs").click(function () {
         window.location.href = "../pages/aboutUs.html";
     });
-    if(!$.cookie('Authorization')){
-        var result = confirm("是否去登录？");
-        if(result){
-            setTimeout("window.location.href = '../pages/login.html'", 1500);
-        }
-    }else{
+    if($.cookie('Authorization')){
         $('.wrap-btn').show()
-        $("#applyMessage").click(function () {
+    }
+    $("#applyMessage").click(function () {
+        if(!$.cookie('Authorization')){
+            window.location.href = '../pages/login.html'
+        }else{
             window.location.href = "../pages/userApply.html";
-        });
+        }
+    });
 
-        $("#changePassword").click(function () {
+    $("#changePassword").click(function () {
+        if(!$.cookie('Authorization')){
+            window.location.href = '../pages/login.html'
+        }else {
             window.location.href = "../pages/changePassword.html";
-        });
-        $("#myOrder").click(function () {
+        }
+    });
+    $("#myOrder").click(function () {
+        if(!$.cookie('Authorization')){
+            window.location.href = '../pages/login.html'
+        }else {
             window.location.href = "../pages/order-apply.html";
-        });
-        $("#messageManagement").click(function () {
+        }
+    });
+    $("#messageManagement").click(function () {
+        if(!$.cookie('Authorization')){
+            window.location.href = '../pages/login.html'
+        }else {
             //window.location.href = "../pages/aboutUs.html";
             greenAlertBox('正在开发中...')
             return false
+        }
+    });
+    $("#productList").click(function () {
+        window.location.href = "../pages/productList.html";
+    });
+
+    $(".wrap-btn-quit").click(function () {
+
+        /*var result = confirm("确认退出？");
+        if(result){
+            loadingBlue();
+            exitSystem();
+        }
+*/
+        layui.use('layer', function(){
+            var layer = layui.layer;
+
+            layer.open({
+                type: 0,
+                title:'提示',
+                area: '300px',
+                content: '确定要退出吗', //这里content是一个普通的String
+                btn: ['取消', '确定'], //可以无限个按钮
+                btn1: function(index, layero){
+                    //do something
+                    layer.close(index); //如果设定了yes回调，需进行手工关闭
+                },
+                btn2: function(index, layero){//确定按钮
+                    layer.close(index);
+                    loadingBlue()
+                    exitSystem();
+                },
+            });
         });
-        $("#productList").click(function () {
-            window.location.href = "../pages/productList.html";
-        });
 
-        $(".wrap-btn-quit").click(function () {
-
-            var result = confirm("是否去登录？");
-            if(result){
-                loadingBlue();
-                exitSystem();
-            }
-
-            /*layui.use('layer', function(){
-                var layer = layui.layer;
-
-                layer.open({
-                    type: 0,
-                    title:'提示',
-                    area: '300px',
-                    content: '确定要退出登录吗', //这里content是一个普通的String
-                    btn: ['取消', '确定'], //可以无限个按钮
-                    yes: function(index, layero){
-                        //do something
-                        layer.close(index); //如果设定了yes回调，需进行手工关闭
-                    },
-                    btn2: function(index, layero){//确定按钮
-                        layer.close(index);
-                        loadingBlue()
-                        exitSystem();
-                    },
-                });
-            });*/
-
-        });
-    }
+    });
 
     // $.ajax({
     //     url: BASEURL + "/order/stat",

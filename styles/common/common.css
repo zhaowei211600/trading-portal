@@ -272,15 +272,15 @@ a {
     font-size: 1.8rem;
     color: #495060;
     letter-spacing: 0;
+    display: flex;
+    flex-direction: column;
 }
-.wrap .menu .bg {
-    background: #E9EAEC;
-}
+
 .wrap .menu .menu1 div,.wrap .menu .menu2 div,.wrap .menu .menu3 div {
     /*width: 100%;*/
-    height: 4rem;
-    line-height: 4rem;
-    font-size: 1.6rem;
+    height: 2.5rem;
+    line-height: 2.2rem;
+    font-size: 12px;
     text-align: center;
     color: #495060;
 }

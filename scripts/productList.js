@@ -1,4 +1,4 @@
-//var typeId = '';
+var typeId = '';
 var isFollow = false;
 var productList = {
     init: function(){
@@ -39,7 +39,7 @@ var productList = {
             $("html").css({"overflow": "hidden", "height": "100%"});
             $("body").css({"overflow": "hidden", "height": "100%"});
 
-            _this.resetLayer();
+            //_this.resetLayer();
             _this.initParams();
         });
         // 关闭
@@ -58,7 +58,7 @@ var productList = {
 
         // 重置
         $(".reset").click(function () {
-            _this.resetLayer
+            _this.resetLayer();
         });
 
         // 确认
@@ -109,17 +109,19 @@ var productList = {
                             productType = '卖方';
                         }
                         dataHTML +=
-                            "<li style=\"margin-bottom: 10px;margin-top: 0;padding: 10px 15px;border: none;background: white;\" " +
-                            "   onclick='showDetail("+item.id+","+item.productType+")'>" +
-                            "                <div>" +
+                            "<li style=\"margin-bottom: 10px;margin-top: 0;padding: 10px 15px;border: none;background: white;display: flex;flex-direction: row;\" onclick='showDetail("+item.id+","+item.productType+")'>" +
+                            "<div>" +
+                            "    <img style=\"width: 95px;height: 80px;\" src=\"../styles/images/banner1.jpg\"/>\n" +
+                            "</div>"+
+                            "                <div style='margin-left: 15px;flex: 1;'>" +
                             "                    <div style=\"font-size: 16px;\">" +
                             "                        <span>"+item.name+"</span>" +
                             "                    </div>" +
                             "                    <div style=\"padding-top: 5px;\">" +
-                            "                        预算：<span style=\"color: red;\">￥"+item.budget+"</span>" +
+                            "                        <span style=\"color: red;\">￥"+item.budget+"</span>" +
                             "                    </div>" +
                             "                    <div style=\"padding-top: 5px;color: #999999;\">\n" + item.createTime +
-                            "                           <span style=\"font-size: 12px;color: #999999;float: right;\">"+productType+"</span>"+
+                            "                           <span style=\"font-size: 12px;color: #999999;margin-left:130px;\">"+productType+"</span>"+
                             "                    </div>" +
                             "                    <div style=\"padding-top: 5px;color: #999999;\">" + item.area + "</div>" +
                             "                </div>" +
@@ -155,7 +157,7 @@ var productList = {
 
 +(function(){
     productList.init();
-    showFirstType();
+    showFirstType(typeId);
     /*if(!$.cookie('Authorization')){
         greenAlertBox("未登录，需登录后查看");
         setTimeout("window.location.href = '../pages/login.html'", 1500);
@@ -172,7 +174,8 @@ function showDetail(id,productType){
         window.location.href = '../pages/productDetail_1.html?productId='+id;
     }
 }
-function showFirstType() {
+
+function showFirstType(typeId) {
     $.ajax({
         url: BASEURL + "/user/type/first" ,
         type: "get",
@@ -182,7 +185,11 @@ function showFirstType() {
                 var tbody = "";
                 for (var i = 0; i < list.length; i++) {
                     var content = list[i];
-                    tbody += "<a href=\"javascript:void(0);\" class=\"check-ok\" data-checkResult=\""+content.id+"\">"+content.typeName+"</a>\n";
+                    if(content.id == typeId){
+                        tbody += "<a href=\"javascript:void(0);\" class=\"check-ok on\" data-checkResult=\""+content.id+"\">"+content.typeName+"</a>\n";
+                    }else{
+                        tbody += "<a href=\"javascript:void(0);\" class=\"check-ok\" data-checkResult=\""+content.id+"\">"+content.typeName+"</a>\n";
+                    }
                 }
                 $("#typeList").html(tbody);
             }
@@ -199,13 +206,11 @@ function checkProduct() {
             type: "get",
             success: function (resultData) {
                 if (resultData.returnCode == 200) {
-                    $("#isFollow").removeClass("icon-weixuanzhong");
-                    $("#isFollow").addClass("icon-yixuanzhong");
+                    $("#followImg").attr("src","../styles/images/StarFilled.png");
                     $("#isFollow").html("取消关注");
                     isFollow = true;
                 }else{
-                    $("#isFollow").removeClass("icon-yixuanzhong");
-                    $("#isFollow").addClass("icon-weixuanzhong");
+                    $("#followImg").attr("src","../styles/images/star.png");
                     $("#isFollow").html("关注");
                     isFollow = false;
                 }
@@ -228,27 +233,19 @@ function followProduct() {
             success: function (resultData) {
                 if (resultData.returnCode == 200) {
                     if(isFollow){
-                        $("#isFollow").removeClass("icon-yixuanzhong");
-                        $("#isFollow").addClass("icon-weixuanzhong");
-                        $("#isFollow").html("关注");
+                        $("#followImg").attr("src","../styles/images/StarFilled.png");
+                        $("#isFollow").html("取消关注");
                         isFollow = false;
                         greenAlertBox("取消关注成功");
                     }else{
-                        $("#isFollow").removeClass("icon-weixuanzhong");
-                        $("#isFollow").addClass("icon-yixuanzhong");
-                        $("#isFollow").html("取消关注");
+                        $("#followImg").attr("src","../styles/images/star.png");
+                        $("#isFollow").html("关注");
                         isFollow = true;
-                        greenAlertBox("关注成功");
                     }
-                }else {
-                    greenAlertBox("操作失败");
                 }
             }
         });
     }else{
-        var result = confirm("是否去登录？");
-        if(result){
-            window.location.href = '../pages/login.html';
-        }
+        window.location.href = '../pages/login.html';
     }
 }

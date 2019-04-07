@@ -63,8 +63,7 @@ $(function () {
                     $('.loadingBlue').remove()
                     if(data.returnCode == 200)
                     {
-                        $(".wrap-change").hide();
-                        $(".wrap-success").show();
+                       window.location.href = "../pages/login.html";
                     }else {
                         greenAlertBox(data.returnMessage);
                         return false

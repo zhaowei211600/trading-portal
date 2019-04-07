@@ -99,10 +99,8 @@ $(function () {
                 contentType: 'application/x-www-form-urlencoded;charset=utf-8',
                 success:function (data) {
                     $('.loadingBlue').remove()
-                    if(data.returnCode == 200)
-                    {
-                        $(".wrap-change").hide();
-                        $(".wrap-success").show();
+                    if(data.returnCode == 200){
+                        window.location.href = "../pages/login.html";
                     }else {
                         greenAlertBox(data.returnMessage);
                     }
