@@ -9,7 +9,7 @@ var productList = {
         this.searchLayer();
         this.query();
         this.loadMore();
-        checkProduct();
+        checkProduct(typeId);
 
     },
     initParams: function(){
@@ -70,7 +70,7 @@ var productList = {
             //_this.params.invoiceNumber = $(".search-info .invoiceNumber").val();
 
             $(".content-body ul").html("");
-            checkProduct();
+            checkProduct(_this.params.firstType);
             _this.query();
             $("html").css({"overflow": "visible", "height": "auto"});
             $("body").css({"overflow": "visible", "height": "auto"});
@@ -108,10 +108,14 @@ var productList = {
                         }else{
                             productType = '卖方';
                         }
+                        var descImg = '';
+                        if(item.descImg){
+                            descImg = '/images/'+ item.descImg;
+                        }
                         dataHTML +=
                             "<li style=\"margin-bottom: 10px;margin-top: 0;padding: 10px 15px;border: none;background: white;display: flex;flex-direction: row;\" onclick='showDetail("+item.id+","+item.productType+")'>" +
                             "<div>" +
-                            "    <img style=\"width: 95px;height: 80px;\" src=\"../styles/images/banner1.jpg\"/>\n" +
+                            "    <img style=\"width: 95px;height: 80px;\" src=\""+descImg+"\"/>\n" +
                             "</div>"+
                             "                <div style='margin-left: 15px;flex: 1;'>" +
                             "                    <div style=\"font-size: 16px;\">" +
@@ -197,8 +201,7 @@ function showFirstType(typeId) {
     });
 }
 
-function checkProduct() {
-    var typeId = $(".check-status .layer-btn-cs a").hasClass("on") ? $(".check-status .layer-btn-cs .on").attr("data-checkResult") : "";
+function checkProduct(typeId) {
     if($.cookie('Authorization')){
         $.ajax({
             url: BASEURL + "/follow/check" ,
@@ -233,13 +236,12 @@ function followProduct() {
             success: function (resultData) {
                 if (resultData.returnCode == 200) {
                     if(isFollow){
-                        $("#followImg").attr("src","../styles/images/StarFilled.png");
-                        $("#isFollow").html("取消关注");
-                        isFollow = false;
-                        greenAlertBox("取消关注成功");
-                    }else{
                         $("#followImg").attr("src","../styles/images/star.png");
                         $("#isFollow").html("关注");
+                        isFollow = false;
+                    }else{
+                        $("#followImg").attr("src","../styles/images/StarFilled.png");
+                        $("#isFollow").html("取消关注");
                         isFollow = true;
                     }
                 }

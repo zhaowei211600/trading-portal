@@ -78,23 +78,11 @@ $(function () {
 
                     $(".displayUnLogin").css('display','none');
                 }
-                if (data.descImg) {
-                    //loadingBlue();
-                    $.ajax({
-                        type: "post",
-                        url: BASEURL + '/user/file/download',
-                        data: {'fileName': data.descImg},
-                        contentType: 'application/x-www-form-urlencoded;charset=utf-8',
-                        // dataType: 'json',
-                        async: true,
-                        crossDomain: true == !(document.all),
-                        success: function (data) {
-                            //$('.loadingBlue').remove()
-                            if (data.returnCode == 200) {
-                                $('#descImg').attr('src', 'data:image/png;base64,' + data.data)
-                            }
-                        }
-                    });
+                var descImg = '';
+                if(data.descImg){
+                    descImg = '/images/'+ data.descImg;
+                    $('#descImg').attr('src', descImg)
+
                 }
             }
         }
@@ -153,13 +141,11 @@ function checkProduct() {
             type: "get",
             success: function (resultData) {
                 if (resultData.returnCode == 200) {
-                    $("#isFollow").removeClass("icon-weixuanzhong");
-                    $("#isFollow").addClass("icon-yixuanzhong");
+                    $("#followImg").attr("src","../styles/images/StarFilled.png");
                     $("#isFollow").html("取消关注");
                     isFollow = true;
                 }else{
-                    $("#isFollow").removeClass("icon-yixuanzhong");
-                    $("#isFollow").addClass("icon-weixuanzhong");
+                    $("#followImg").attr("src","../styles/images/star.png");
                     $("#isFollow").html("关注");
                     isFollow = false;
                 }
@@ -181,13 +167,11 @@ function followProduct() {
             success: function (resultData) {
                 if (resultData.returnCode == 200) {
                     if(isFollow){
-                        $("#isFollow").removeClass("icon-yixuanzhong");
-                        $("#isFollow").addClass("icon-weixuanzhong");
+                        $("#followImg").attr("src","../styles/images/star.png");
                         $("#isFollow").html("关注");
                         isFollow = false;
                     }else{
-                        $("#isFollow").removeClass("icon-weixuanzhong");
-                        $("#isFollow").addClass("icon-yixuanzhong");
+                        $("#followImg").attr("src","../styles/images/StarFilled.png");
                         $("#isFollow").html("取消关注");
                         isFollow = true;
                     }
