@@ -13,8 +13,9 @@ var productList = {
 
     },
     initParams: function(){
-        this.params.page = 1;
+        this.params.pageNum = 1;
         this.params.pageSize = 10;
+        this.params.status = 1;
         //this.params.sendStatus = "";
         this.params.firstType = "";
         this.params.productName = "";
@@ -152,7 +153,7 @@ var productList = {
             if(_this.loadOK && ($(this).scrollTop() + $(this).height()) >= $(".load-more").offset().top){
                 _this.loadOK = false;
 
-                _this.params.page ++;
+                _this.params.pageNum ++;
                 _this.query();
             }
         });

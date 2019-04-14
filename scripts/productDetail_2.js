@@ -49,6 +49,11 @@ function initProduct() {
                 $("#process").html(data.process);
                 $("#tradeDetail").html(data.tradeDetail);
                 $("#productName").html(data.name);
+                $("#productId").html(data.productId);
+                $("#type").html(data.firstTypeName +"-"+ data.secondTypeName);
+                $("#budget").html(data.budget);
+                $("#createTime").html(data.createTime);
+                $("#area").html(data.area);
                 var descImg = '';
                 if(data.descImg){
                     descImg = '/images/'+ data.descImg;
@@ -150,6 +155,11 @@ $(function () {
             case '3':
             {
                 $('.itemText:eq(3)').removeClass('hidden')
+                break;
+            }
+            case '4':
+            {
+                $('.itemText:eq(4)').removeClass('hidden')
                 break;
             }
         }

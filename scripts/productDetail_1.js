@@ -122,7 +122,7 @@ $(function () {
                 $("#attachmentList").html(tbody);
 
             }
-            if(result.returnCode = "11012"){
+            if(result.returnCode == "11012"){
                 $("#attachmentList").html("您的等级不足，暂时不能查看相关内容");
             }
         }
