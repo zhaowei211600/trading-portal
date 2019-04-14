@@ -78,9 +78,9 @@ var orderList = {
                             "<li>" +
                             "<table>" +
                                 "<tr class='standard'>" +
-                                    "<td colspan='2'>" + item.firstTypeName + "/"+ item.secondTypeName + "</td>" +
-                                    "<td colspan='1'>" + item.title + "</td>" +
-                                    "<td colspan='1'>" + item.createTime + "</td>" +
+                                    "<td colspan='2' style='width: 50%'>" + item.firstTypeName + "/"+ item.secondTypeName + "</td>" +
+                                    "<td colspan='1' style='width: 25%'>" + item.title + "</td>" +
+                                    "<td colspan='1' style='width: 25%'>" + item.createTime + "</td>" +
                                 "</tr>" +
                                 "<tr>" +
                                     "<td colspan='4'>" + item.content + "</td>" +
