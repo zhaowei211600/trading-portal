@@ -2,8 +2,7 @@
 $(function () {
 
         $("#aboutUs").click(function () {
-            window.location.href = "../pages/aboutUs.html";
-            //greenAlertBox('正在开发中...')
+            window.location.href = "../pages/messageList.html";
             return false
         });
         $("#changePassword").click(function () {

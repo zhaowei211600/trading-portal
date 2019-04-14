@@ -181,8 +181,7 @@ $(function () {
         if(!$.cookie('Authorization')){
             window.location.href = '../pages/login.html'
         }else {
-            //window.location.href = "../pages/aboutUs.html";
-            greenAlertBox('正在开发中...')
+            window.location.href = "../pages/messageList.html";
             return false
         }
     });
