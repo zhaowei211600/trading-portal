@@ -18,6 +18,19 @@
             margin-top: 20px;
             outline: none;
         }
+        /* 提交按钮 */
+        .sbmit-btn {
+            margin: 0 4%;
+            width: 92%;
+            height: 4.4rem;
+            background: red;
+            border: 0;
+            box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.10);
+            border-radius: 5px;
+            font-size: 1.6rem;
+            color: #FFFFFF;
+            letter-spacing: 0;
+        }
     </style>
 </head>
 <body>
@@ -27,7 +40,7 @@
 <!--
     <a href="../pages/myOrder.html" ><i class="iconfont"></i>发布历史</a >
 -->
-    <a href="../pages/myOrder.html" style="font-size: 14px;color: #485166;"><i class="iconfont">发布历史</i></a>
+    <a href="../pages/myOrder.html" style="font-size: 14px;color: #485166;"><i style="font-size: 14px;">发布历史</i></a>
 </div>
 <div class="home-detail-head" style="margin-top: 10px;" >
     <div class="leftright">
@@ -37,25 +50,14 @@
         <select id="firstType">
         </select>
     </div>
-
-
-
 </div>
-
-
 <div class="footer order-footer apply_delivery">
-    <div class="acceptBtnStyle" id="apply">确认提交</div>
+    <button class="sbmit-btn" id="apply">确认提交</button>
 </div>
-
-
-
-
 <script type="text/javascript" src="../scripts/lib/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="../scripts/lib/bootstrap.min.js"></script>
 <script type="text/javascript" src="../scripts/common/jquery.cookie.js"></script>
 <script type="text/javascript" src="../scripts/common/common.js"></script>
 <script type="text/javascript" src="../scripts/orderApply.js"></script>
-
-
 </body>
 </html>

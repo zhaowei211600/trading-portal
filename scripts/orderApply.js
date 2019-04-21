@@ -11,6 +11,15 @@ $(function () {
         param["typeId"] = firstType;
         param["typeName"] = firstTypeName;
 
+        if (desc=='' || desc==null){
+            greenAlertBox("需求信息不允许为空");
+            return false
+        }
+        if (firstType=='' || firstType==null){
+            greenAlertBox("请选择项目类型");
+            return false
+        }
+
         $.ajax({
             url: BASEURL + "/user/require/save",
             data: JSON.stringify(param),

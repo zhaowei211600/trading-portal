@@ -14,25 +14,35 @@ $(function () {
             return false
         }
 
-        if (!imgFile) {
-            greenAlertBox('请上传企业名片')
-            return false
-        }
-
-        if (!email ) {
-            greenAlertBox('请输入邮箱')
-            return false
-        }
-        if (!contactPhone ) {
-            greenAlertBox('请输入联系电话')
-            return false
-        }
         if (!position) {
             greenAlertBox('请输入职务')
             return false
         }
+
         if (!address) {
             greenAlertBox('请输入所在地区')
+            return false
+        }
+
+        if (!contactPhone ) {
+            greenAlertBox('请输入联系电话')
+            return false
+        }else if (!(/^1[3|4|5|8][0-9]\d{4,8}$/.test(contactPhone))){
+            greenAlertBox('请输入正确格式联系电话')
+            return false
+        }
+
+        var checkEmail=/^[a-zA-Z0-9_-]+@([a-zA-Z0-9]+\.)+(com|cn|net|org)$/;
+        if (!email) {
+            greenAlertBox('请输入邮箱')
+            return false
+        }else if (!checkEmail.test(email)){
+            greenAlertBox('请输入正确格式邮箱，如jzf@jzf.com')
+            return false
+        }
+
+        if (!imgFile) {
+            greenAlertBox('请上传企业名片')
             return false
         }
         var form = new FormData();

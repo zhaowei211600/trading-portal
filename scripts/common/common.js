@@ -2,7 +2,8 @@
 //var BASEURL = 'http://127.0.0.1:10002';
 //var BASEURL = 'http://39.106.157.230:10002';
 //var BASEURL = 'http://118.190.146.125:10002';
-var BASEURL = 'http://zhaobangshou.com.cn/backportal';
+//var BASEURL = 'http://zhaobangshou.com.cn/backportal';
+var BASEURL = 'http://39.106.90.79/backportal';
 
 
 

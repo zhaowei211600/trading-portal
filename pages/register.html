@@ -26,28 +26,33 @@
             <span class="warp-main-span">真实姓名</span>
             <input type="input" placeholder="请填写真实姓名" id="realName" maxlength="8" class="warp-main-input warp-main-password">
             <p class="warp-main-hr"></p>
+
             <span class="warp-main-span">手机号</span>
             <input type="tel" onkeyup="value=value.replace(/[^0-9]/g,'')" placeholder="请填写您的手机号" id="phone" maxlength="11" class="warp-main-input warp-main-phone">
             <p class="warp-main-hr"></p>
+
             <span class="warp-main-span">登录密码</span>
-            <input type="password" placeholder="请填写8-16位字母、数字混合密码" id="password" maxlength="16" class="warp-main-input warp-main-password">
+            <input type="password" placeholder="请填写6-18位字母、数字混合密码" id="password" maxlength="16" class="warp-main-input warp-main-password">
             <p class="warp-main-hr"></p>
 
-            <div class="yzm-row" style="height: 30px">
+            <div class="yzm-row">
                 <span class="warp-main-span">图形验证码</span>
                 <input type="input" placeholder="请填写图形验证码" id="yzm_img" maxlength="6" class="warp-main-input warp-main-yzm">
-                <img id="imageCode" style="width: auto;width: 80px;position: relative;top: -1px;float: right;right: 20px;" onclick="refreshImageCode()" src="">
+                <img id="imageCode" style="width: auto;width: 80px;height:30px; position: relative;top: -1px;float: right;right: 20px;" onclick="refreshImageCode()" src="">
             </div>
             <p class="warp-main-hr"></p>
+
             <div class="yzm-row">
                 <span class="warp-main-span">短信验证码</span>
                 <input type="input" onkeyup="value=value.replace(/[^0-9]/g,'')" placeholder="请填写短信验证码" id="yzm" maxlength="6" class="warp-main-input warp-main-yzm">
                 <button class="login-btn-yzm" id="btn-yzm" >发送验证码</button>
             </div>
             <p class="warp-main-hr"></p>
+
             <span class="warp-main-span">推荐人姓名</span>
             <input type="input" placeholder="请填写推荐人姓名" id="recommender" maxlength="8" class="warp-main-input warp-main-password">
             <p class="warp-main-hr"></p>
+
             <span class="warp-main-span">推荐人手机</span>
             <input type="tel" onkeyup="value=value.replace(/[^0-9]/g,'')" placeholder="请填写您的手机号" id="recommenderPhone" maxlength="11" class="warp-main-input warp-main-password">
             <p class="warp-main-hr"></p>
