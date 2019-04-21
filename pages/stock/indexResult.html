@@ -70,10 +70,10 @@
     </style>
 </head>
 <body>
-<!--<div class="header">
+<div class="header">
     <a class="backImg" href="../../pages/stock/index.html" ><i class="iconfont icon-fanhuizuojiantou"></i>返回</a>
-    <div class=" grayGround">金资服</div>
-</div>-->
+    <div class=" grayGround">小非减持</div>
+</div>
     <div class="layui-collapse">
         <div class="layui-colla-item" style="margin-top: 55px">
             <h2 class="layui-colla-title">减持数据</h2>
@@ -128,11 +128,11 @@
                 <ul>
                     <li><span id="reductionAmount"></span>   元</li>
                     <li><span id="otherTax"></span>元（印花税等）</li>
-                    <li><span id="tax"></span>元</li>
+                    <li><span id="tax"></span> 元</li>
                     <li><span id="acceptTax"></span>    元</li>
-                    <li class="company" id="corpRealAmount"><span></span>    元</li>
-                    <li class="company" id="partnerTax"><span></span>    元</li>
-                    <li class="company" id="partnerAmount"><span></span>    元</li>
+                    <li class="company"><span id="corpRealAmount"></span>    元</li>
+                    <li class="company"><span id="partnerTax"></span>    元</li>
+                    <li class="company"><span id="partnerAmount"></span>    元</li>
                     <li class="person"><span id="realAmount"></span>   元</li>
                 </ul>
             </div>
@@ -154,9 +154,9 @@
         <div>
             <ul>
                 <li><span class="corpOptimizeRealAmount">0.00</span>   元</li>
-                <li><span class="partnerAmount">0.00</span>元</li>
+                <li><span class="partnerOptimizeAmount">0.00</span>元</li>
                 <li><span class="optimizeAmount">0.00</span>    元</li>
-                <li><span class="partnerOptimizeAmount">0.00</span>    元</li>
+                <li><span class="partnerIncreaseAmount">0.00</span>    元</li>
 
             </ul>
         </div>
@@ -202,15 +202,15 @@
     <div class="box" style="display: none">
         <form class="layui-form" action="">
             <div class="layui-form-item">
-                <input type="text" name="phone" id="phone" required  lay-verify="required" placeholder="留下您的手机号" autocomplete="off" class="layui-input">
+                <input type="input" name="phone" id="phone"  lay-verify="required" required autofocus placeholder="留下您的手机号" autocomplete="off" class="layui-input">
             </div>
             <div class="layui-form-item">
-                <input type="text" name="imageCode" id="imageCode" required lay-verify="required" placeholder="填写验证码" style="width: 55%;float: left;" autocomplete="off" class="layui-input">
+                <input type="input" name="imageCode" id="imageCode"  lay-verify="required" required autofocus  placeholder="填写验证码" style="width: 55%;float: left;" autocomplete="off" class="layui-input">
                 <div class="layui-form-mid layui-word-aux"><img style="height: 38px;" id="messageImg" onclick="refreshImageCode()" src=""></div>
             </div>
             <div class="layui-form-item">
-                <input type="text" name="messageCode" required lay-verify="required" placeholder="填写短信验证码" style="width: 55%;float: left;" autocomplete="off" class="layui-input">
-                <div class="layui-form-mid layui-word-aux" style="width: 40%;"><button class="layui-btn layui-btn-primary" id="getMessage" onclick="getMessageCode()" style="padding: 0 5px;width: 1.3rem;">获取短信验证码</button></div>
+                <input type="input" name="messageCode"  lay-verify="required" autofocus required   placeholder="填写短信验证码" style="width: 55%;float: left;" autocomplete="off" class="layui-input">
+                <div class="layui-form-mid layui-word-aux" style="width: 40%;"><button type="button" class="layui-btn layui-btn-primary" id="getMessage" onclick="getMessageCode()" style="padding: 0 5px;width: 1.3rem;">获取短信验证码</button></div>
             </div>
             <div class="red f14">提交后即可获得优化后的减持结果</div>
             <button type="button" class="login-btn"  lay-submit lay-filter="formDemo">获得优化结果</button>
@@ -305,9 +305,9 @@
                                 $('#companyOptimize').show()
                                 $('#personOptimize').hide()
                                 $('.corpOptimizeRealAmount').html(resp.data.corpOptimizeRealAmount)
-                                $('.partnerAmount').html(resp.data.partnerAmount)
-                                $('.optimizeAmount').html(resp.data.optimizeAmount)
                                 $('.partnerOptimizeAmount').html(resp.data.partnerOptimizeAmount)
+                                $('.optimizeAmount').html(resp.data.optimizeAmount)
+                                $('.partnerIncreaseAmount').html(resp.data.partnerIncreaseAmount)
 
 
                             }
@@ -339,8 +339,11 @@
 
     })();
     function getMessageCode() {
-
-        countDown($('#getMessage'))
+        var phone = $('#phone').val();
+        if(!checkPhone(phone)){
+            layer.msg("请填写正确的手机号！");
+            return;
+        }
         $.ajax({
             type: "get",
             url: BASEURL + '/util/messageCode',
@@ -350,9 +353,11 @@
             },
             contentType: 'application/json;charset=utf-8',
             success: function (resp) {
-                console.log(resp)
-
-
+                if(resp.returnCode == '200'){
+                    countDown($('#getMessage'))
+                }else{
+                    layer.msg(resp.returnMessage);
+                }
             }
         })
 
@@ -385,6 +390,15 @@
                 , 1000)
         }
     };
+    //手机号正则
+    function checkPhone(phone) {
+        var mobile=/^(((13[0-9]{1})|(15[0-9]{1})|(17[0-9]{1})|(18[0-9]{1})|(14[0-9]{1}|(19[0-9]{1})))+\d{8})$/;
+        if(!mobile.test(phone)){
+            return false
+        }else{
+            return true
+        }
+    }
 </script>
 </body>
 </html>

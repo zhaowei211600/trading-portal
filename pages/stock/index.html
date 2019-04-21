@@ -56,10 +56,10 @@
     </style>
 </head>
 <body>
-    <!--<div class="header">
-        <a class="backImg" href="" ><i class="iconfont icon-fanhuizuojiantou"></i>返回</a>
-        <div class=" grayGround">金资服</div>
-    </div>-->
+    <div class="header">
+        <!--<a class="backImg" href="" ><i class="iconfont icon-fanhuizuojiantou"></i>返回</a>-->
+        <div class=" grayGround">小非减持</div>
+    </div>
     <div class="banner">
         <img src="../../styles/images/banner03.jpg"/>
     </div>
@@ -78,37 +78,37 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">原始投资金额</label>
                 <div class="layui-input-block">
-                    <input type="text" id="investAmount" name="investAmount" required  lay-verify="required" placeholder="请填写原始投资金额(元)" autocomplete="off" class="layui-input">
+                    <input type="input" id="investAmount" name="investAmount"  lay-verify="required" required autofocus placeholder="请填写原始投资金额(元)" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">原始投资日期</label>
                 <div class="layui-input-block">
-                    <input type="text" name="investDate" id="investDate" required  lay-verify="required" placeholder="请选择原始投资日期" autocomplete="off" class="layui-input">
+                    <input type="text" name="investDate" id="investDate"  lay-verify="required" required autofocus placeholder="请选择原始投资日期" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">股票上市发行日</label>
                 <div class="layui-input-block">
-                    <input type="text" name="stockDate" id="stockDate" required  lay-verify="required" placeholder="请选择股票上市发行日" autocomplete="off" class="layui-input">
+                    <input type="text" name="stockDate" id="stockDate"  lay-verify="required" required autofocus placeholder="请选择股票上市发行日" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">股票IPO发行价</label>
                 <div class="layui-input-block">
-                    <input type="text" name="listUnitPrice" id="listUnitPrice" required  lay-verify="required" placeholder="请填写股票IPO发行价(元)" autocomplete="off" class="layui-input">
+                    <input type="text" name="listUnitPrice" id="listUnitPrice"  lay-verify="required" required autofocus placeholder="请填写股票IPO发行价(元)" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">减持所有股票数</label>
                 <div class="layui-input-block">
-                    <input type="text" name="reductionQuantity" id="reductionQuantity" required  lay-verify="required" placeholder="请填写减持所有股票数(股)" autocomplete="off" class="layui-input">
+                    <input type="text" name="reductionQuantity" id="reductionQuantity"  lay-verify="required" required autofocus placeholder="请填写减持所有股票数(股)" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">减持股票单价</label>
                 <div class="layui-input-block">
-                    <input type="text" name="reductionUnitPrice" id="reductionUnitPrice" required  lay-verify="required" placeholder="请填写减持股票单价(元)" autocomplete="off" class="layui-input">
+                    <input type="text" name="reductionUnitPrice" id="reductionUnitPrice"  lay-verify="required" required autofocus placeholder="请填写减持股票单价(元)" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <button type="button" class="login-btn"  lay-submit lay-filter="formDemo" id="stat">立即计算</button>
