@@ -72,7 +72,7 @@
 <body>
 <div class="header">
     <a class="backImg" href="../../pages/stock/index.html" ><i class="iconfont icon-fanhuizuojiantou"></i>返回</a>
-    <div class=" grayGround">小非减持计算结果</div>
+    <div class=" grayGround">小非减持</div>
 </div>
     <div class="layui-collapse">
         <div class="layui-colla-item" style="margin-top: 55px">
@@ -153,10 +153,10 @@
         </div>
         <div>
             <ul>
-                <li><span class="corpOptimizeRealAmount">0.00</span> 元</li>
-                <li><span class="partnerAmount">0.00</span> 元</li>
-                <li><span class="optimizeAmount">0.00</span> 元</li>
-                <li><span class="partnerOptimizeAmount">0.00</span> 元</li>
+                <li><span class="corpOptimizeRealAmount">0.00</span>   元</li>
+                <li><span class="partnerOptimizeAmount">0.00</span>元</li>
+                <li><span class="optimizeAmount">0.00</span>    元</li>
+                <li><span class="partnerIncreaseAmount">0.00</span>    元</li>
 
             </ul>
         </div>
@@ -267,6 +267,34 @@
                             $('.partnerAmount').html(resp.data.partnerAmount)
                             $('.optimizeAmount').html(resp.data.optimizeAmount)
                             $('.partnerOptimizeAmount').html(resp.data.partnerOptimizeAmount)
+            //监听提交
+            form.on('submit(formDemo)', function(data){
+                //console.log(JSON.stringify(data.field));
+                var data = $.extend(requestData,data.field)
+                data.statType = '2'
+                $.ajax({
+                    type: "post",
+                    url: BASEURL + '/util/stat',
+                    data: JSON.stringify(data),
+                    dataType: "json",
+                    contentType: "application/json",
+                    success: function (resp) {
+                        layer.close(index)
+                        if(resp.returnCode == '200'){
+                            $('#popBox').hide()
+                            $('#reginCal').show()
+                            if(requestData.corpType == '1'){ //合伙人
+                                $('#personOptimize').show()
+                                $('#companyOptimize').hide()
+                                $('.realAmount').html(resp.data.realAmount)
+                                $('.optimizeAmount').html(resp.data.optimizeAmount)
+                            }else if(requestData.corpType == '2'){//有限责任公司
+                                $('#companyOptimize').show()
+                                $('#personOptimize').hide()
+                                $('.corpOptimizeRealAmount').html(resp.data.corpOptimizeRealAmount)
+                                $('.partnerOptimizeAmount').html(resp.data.partnerOptimizeAmount)
+                                $('.optimizeAmount').html(resp.data.optimizeAmount)
+                                $('.partnerIncreaseAmount').html(resp.data.partnerIncreaseAmount)
 
 
                         }
