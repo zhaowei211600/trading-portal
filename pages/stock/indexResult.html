@@ -226,86 +226,6 @@
 <script type="text/javascript" src="../../scripts/common/common.js"></script>
 
 <script>
-    var layer;
-    var index;
-    var form;
-    layui.use('element', function(){
-        var element = layui.element;
-    });
-    layui.use('layer', function(){
-        var layer = layui.layer;
-    });
-
-    layui.use('form', function(){
-        var form = layui.form;
-
-        //监听提交
-        form.on('submit(formDemo)', function(data){
-            //console.log(JSON.stringify(data.field));
-            var data = $.extend(requestData,data.field)
-            data.statType = '2'
-            $.ajax({
-                type: "post",
-                url: BASEURL + '/util/stat',
-                data: JSON.stringify(data),
-                dataType: "json",
-                contentType: "application/json",
-                success: function (resp) {
-                    layer.close(index)
-                    if(resp.returnCode == '200'){
-                        $('#popBox').hide()
-                        $('#reginCal').show()
-                        if(requestData.corpType == '1'){ //合伙人
-                            $('#personOptimize').show()
-                            $('#companyOptimize').hide()
-                            $('.realAmount').html(resp.data.realAmount)
-                            $('.optimizeAmount').html(resp.data.optimizeAmount)
-                        }else if(requestData.corpType == '2'){//有限责任公司
-                            $('#companyOptimize').show()
-                            $('#personOptimize').hide()
-                            $('.corpOptimizeRealAmount').html(resp.data.corpOptimizeRealAmount)
-                            $('.partnerAmount').html(resp.data.partnerAmount)
-                            $('.optimizeAmount').html(resp.data.optimizeAmount)
-                            $('.partnerOptimizeAmount').html(resp.data.partnerOptimizeAmount)
-            //监听提交
-            form.on('submit(formDemo)', function(data){
-                //console.log(JSON.stringify(data.field));
-                var data = $.extend(requestData,data.field)
-                data.statType = '2'
-                $.ajax({
-                    type: "post",
-                    url: BASEURL + '/util/stat',
-                    data: JSON.stringify(data),
-                    dataType: "json",
-                    contentType: "application/json",
-                    success: function (resp) {
-                        layer.close(index)
-                        if(resp.returnCode == '200'){
-                            $('#popBox').hide()
-                            $('#reginCal').show()
-                            if(requestData.corpType == '1'){ //合伙人
-                                $('#personOptimize').show()
-                                $('#companyOptimize').hide()
-                                $('.realAmount').html(resp.data.realAmount)
-                                $('.optimizeAmount').html(resp.data.optimizeAmount)
-                            }else if(requestData.corpType == '2'){//有限责任公司
-                                $('#companyOptimize').show()
-                                $('#personOptimize').hide()
-                                $('.corpOptimizeRealAmount').html(resp.data.corpOptimizeRealAmount)
-                                $('.partnerOptimizeAmount').html(resp.data.partnerOptimizeAmount)
-                                $('.optimizeAmount').html(resp.data.optimizeAmount)
-                                $('.partnerIncreaseAmount').html(resp.data.partnerIncreaseAmount)
-
-
-                        }
-                    }else{
-                        layer.msg(resp.returnMessage);
-                    }
-                }
-            })
-        });
-    });
-
     +(function(){
         var index;
         var statResponse = localStorage.getItem("statResponse");
@@ -347,6 +267,59 @@
 
 
         }
+
+        layui.use('element', function(){
+            var element = layui.element;
+        });
+        var layer;
+        var index;
+        layui.use('layer', function(){
+            layer = layui.layer;
+
+        });
+
+        layui.use('form', function(){
+            var form = layui.form;
+
+            //监听提交
+            form.on('submit(formDemo)', function(data){
+                //console.log(JSON.stringify(data.field));
+                var data = $.extend(requestData,data.field)
+                data.statType = '2'
+                $.ajax({
+                    type: "post",
+                    url: BASEURL + '/util/stat',
+                    data: JSON.stringify(data),
+                    dataType: "json",
+                    contentType: "application/json",
+                    success: function (resp) {
+                        layer.close(index)
+                        if(resp.returnCode == '200'){
+                            $('#popBox').hide()
+                            $('#reginCal').show()
+                            if(requestData.corpType == '1'){ //合伙人
+                                $('#personOptimize').show()
+                                $('#companyOptimize').hide()
+                                $('.realAmount').html(resp.data.realAmount)
+                                $('.optimizeAmount').html(resp.data.optimizeAmount)
+                            }else if(requestData.corpType == '2'){//有限责任公司
+                                $('#companyOptimize').show()
+                                $('#personOptimize').hide()
+                                $('.corpOptimizeRealAmount').html(resp.data.corpOptimizeRealAmount)
+                                $('.partnerOptimizeAmount').html(resp.data.partnerOptimizeAmount)
+                                $('.optimizeAmount').html(resp.data.optimizeAmount)
+                                $('.partnerIncreaseAmount').html(resp.data.partnerIncreaseAmount)
+
+
+                            }
+                        }else{
+                            layer.msg(resp.returnMessage);
+                        }
+                    }
+                })
+            });
+        });
+
 
         $('#popBox').click(function () {
             // layui.use('layer', function(){

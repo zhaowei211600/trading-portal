@@ -104,10 +104,16 @@ var productList = {
                     // 将 返回数据中每一项下的checkInvoice属性扩展到该项后面
                     mapData.forEach(function (item, index, array) {
                         var productType = '';
+                        var auditStatus = '';
                         if(item.productType == '1'){
                             productType = '买方';
                         }else{
                             productType = '卖方';
+                        }
+                        if(item.auditStatus == '1'){
+                            auditStatus = '已认证';
+                        }else if(item.auditStatus == '2'){
+                            auditStatus = '未认证';
                         }
                         var descImg = '';
                         if(item.descImg){
@@ -126,7 +132,8 @@ var productList = {
                             "                        <span style=\"color: red;\">￥"+item.budget+"</span>" +
                             "                    </div>" +
                             "                    <div style=\"padding-top: 5px;color: #999999;\">\n" + item.createTime +
-                            "                           <span style=\"font-size: 12px;color: #999999;margin-left:130px;\">"+productType+"</span>"+
+                            "                        <span style='color: #999999;margin-left:40px;'>"+auditStatus+"</span>" +
+                            "                           <span style=\"font-size: 12px;color: #999999;margin-left:40px;\">"+productType+"</span>"+
                             "                    </div>" +
                             "                    <div style=\"padding-top: 5px;color: #999999;\">" + item.area + "</div>" +
                             "                </div>" +

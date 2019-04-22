@@ -76,18 +76,20 @@ var orderList = {
 
                         dataHTML +=
                             "<li>" +
-                            "<table>" +
-                                "<tr class='standard'>" +
-                                    "<td colspan='2' style='width: 50%'>" + item.firstTypeName + "/"+ item.secondTypeName + "</td>" +
-                                    "<td colspan='1' style='width: 25%'>" + item.title + "</td>" +
-                                    "<td colspan='1' style='width: 25%'>" + item.createTime + "</td>" +
-                                "</tr>" +
-                                "<tr>" +
-                                    "<td colspan='4'>" + item.content + "</td>" +
-                                "</tr>" +
+                            "<table >" +
+                            "<tr class='standard'>" +
+                            "<td style='font-weight:normal;'>"+ item.title + "</td>" +
+                            "<td>" + item.firstTypeName + "/"+ item.secondTypeName + "</td>" +
+                            "</tr>" +
+                            "<tr>" +
+                            "<td >" + item.createTime + "</td>" +
+                            "</tr>" +
+                            "<tr>" +
+                            "<td colspan='2'>" + item.content + "</td>" +
+                            "</tr>" +
                             "</table>" +
                             "<a href='#' onclick='showDetail("+ item.productId+","+item.productType+")' class='ticket-info'>" +
-                            "</a>" +
+                            "</a >" +
                             "</li>";
                     });
                     $(".content-body ul").append(dataHTML);

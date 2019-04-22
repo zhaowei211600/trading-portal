@@ -142,8 +142,28 @@ function getAccount() {
         }
     });
 }
-loadingBlue()
+
+function messageStat() {
+    $.ajax({
+        url: BASEURL + "/message/stat",
+        type: "get",
+        crossDomain: true == !(document.all),
+        success: function (resultData) {
+            if (resultData.returnCode == 200) {
+                if (resultData.data != null) {
+                    $("#totalMessage").html("("+resultData.data+")");
+                }
+            }
+            return false;
+        },
+        complete: function () {
+        }
+    });
+}
+
+loadingBlue();
 getAccount();
+messageStat();
 
 
 //点击事件
@@ -219,22 +239,4 @@ $(function () {
         });
 
     });
-
-    // $.ajax({
-    //     url: BASEURL + "/order/stat",
-    //     type: "post",
-    //     crossDomain: true == !(document.all),
-    //     success: function (resultData) {
-    //         if (resultData.returnCode == 200) {
-    //             if (resultData.data != null) {
-    //                 $("#totalCount").html("("+resultData.data.totalCount+")");
-    //                 $("#finishAmount").html("¥"+resultData.data.finishAmount);
-    //             }
-    //         }
-    //         return false;
-    //     },
-    //     complete: function () {
-    //     }
-    // });
-
 });
