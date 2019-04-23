@@ -90,6 +90,8 @@ input:-ms-input-placeholder { /* Internet Explorer 10+ */
     font-size: 1.2rem;
     color: #fff;
     letter-spacing: 0;
+    position: relative;
+    top: 4px;
 }
 /* 提示 */
 .warp-main-prompt{
