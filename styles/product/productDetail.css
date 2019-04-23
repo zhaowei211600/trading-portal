@@ -109,6 +109,7 @@ li {
 }
 .shareBack{
     background-color: #000000;position: absolute;margin: auto;top: 0;bottom: 0;left: 0;right: 0;opacity: 0.3;
+    z-index: 99;
 }
 .shareLoading{
     position: absolute;
@@ -116,4 +117,6 @@ li {
 }
 .isShowShare{
     display: none;
+    z-index: 99;
 }
+.ovfHiden{overflow: hidden;height: 100%;}

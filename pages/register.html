@@ -35,16 +35,16 @@
             <input type="password" placeholder="请填写6-18位字母、数字混合密码" id="password" maxlength="16" class="warp-main-input warp-main-password">
             <p class="warp-main-hr"></p>
 
-            <div class="yzm-row">
-                <span class="warp-main-span">图形验证码</span>
-                <input type="input" placeholder="请填写图形验证码" id="yzm_img" maxlength="6" class="warp-main-input warp-main-yzm">
-                <img id="imageCode" style="width: auto;width: 80px;height:30px; position: relative;top: -1px;float: right;right: 20px;" onclick="refreshImageCode()" src="">
+            <div class="yzm-row" style="margin-top: 14px;">
+                <span class="warp-main-span" style="margin-top: 0;">图形验证码</span>
+                <input type="input" placeholder="请填写图形验证码" id="yzm_img" maxlength="6" class="warp-main-input warp-main-yzm" style=" margin-left: 5px;flex: 1;">
+                <img id="imageCode" style="width: 80px;height:30px; position: relative;top: -1px;margin-right: 5%;" onclick="refreshImageCode()" src="">
             </div>
             <p class="warp-main-hr"></p>
 
-            <div class="yzm-row">
-                <span class="warp-main-span">短信验证码</span>
-                <input type="input" onkeyup="value=value.replace(/[^0-9]/g,'')" placeholder="请填写短信验证码" id="yzm" maxlength="6" class="warp-main-input warp-main-yzm">
+            <div class="yzm-row" style="margin-top: 14px;">
+                <span class="warp-main-span" style="margin-top: 0;">短信验证码</span>
+                <input type="input" onkeyup="value=value.replace(/[^0-9]/g,'')" placeholder="请填写短信验证码" id="yzm" maxlength="6" class="warp-main-input warp-main-yzm" style="margin-left: 5px;flex: 1;">
                 <button class="login-btn-yzm" id="btn-yzm" >发送验证码</button>
             </div>
             <p class="warp-main-hr"></p>

@@ -124,6 +124,8 @@ function followProduct() {
 }
 function addBackGround() {
     $('.isShowShare').show()
+    $('html,body').removeClass('ovfHiden');
+
 
 }
 
@@ -171,5 +173,7 @@ $(function () {
 
     $('.isShowShare').click(function () {
         $('.isShowShare').hide()
+        $('html,body').addClass('ovfHiden');
+
     })
 });
