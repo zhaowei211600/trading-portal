@@ -1,5 +1,10 @@
 loadingBlue()
+function refreshImageCode() {
+    $('#imageCode').attr('src',BASEURL + '/util/imageCode?flag='+Math.random());
+}
 $(function () {
+    refreshImageCode();
+
     "use strict";
     $('.loadingBlue').remove()
     //重新登录
@@ -7,22 +12,28 @@ $(function () {
         window.location.href = "../pages/login.html"
     });
 
-    var jsondata,phone,phonecheck,password,password2,passcheck,captcha,phonecf,reg,buttonStatus;
+    var jsondata,phone,phonecheck,password,password2,passcheck,captcha,imageCode;
 
     //重置密码
     $("#login").click(function () {
+        imageCode = $("#userImageCode").val();
         captcha = $("#yzm").val();
         phone=$("#phone").val();
         password = $("#newPassword").val();
         password2 = $("#twicePassword").val();
         passcheck =  checkPassword(password);
         phonecheck = checkPhone(phone,1,passcheck,password,password2);
+
         if (!phonecheck) {
             greenAlertBox("手机号输入不正确");
             return false
         }
         if (!passcheck) {
             greenAlertBox("密码输入格式不正确");
+            return false
+        }
+        if(!imageCode){
+            greenAlertBox("图片验证码不能为空");
             return false
         }
         if(!passcheck){
@@ -41,12 +52,13 @@ $(function () {
             return false
         }
         if(!captcha){
-            greenAlertBox("验证码不能为空");
+            greenAlertBox("短信验证码不能为空");
             return false
         }
 
+
         loadingBlue()
-        getjson(phone,password,captcha,password2);
+        getjson(phone,password,captcha,password2,imageCode);
         /*jsondata = {"phone":phone};
         $.ajax(
             {
@@ -88,8 +100,8 @@ $(function () {
 
 
     //登录校验ajax，登陆成功 重定向 失败  alert（）
-    function getjson(phone,password,code,password2) {
-        jsondata = {"phone":phone,"messageCode":code,"password":password,"passwordAgain":password2};
+    function getjson(phone,password,code,password2,imageCode) {
+        jsondata = {"phone":phone,"messageCode":code,"password":password,"passwordAgain":password2,"imageCode":imageCode};
         $.ajax(
             {
                 url: BASEURL +"/user/password/reset",
@@ -144,7 +156,12 @@ $(function () {
     }
     //获取手机短信验证码
     function getyzm(phone) {
-        jsondata = {"phone":phone, "type":2};
+        var imageCode = $("#userImageCode").val();
+        if(!imageCode){
+            greenAlertBox("图片验证码不能为空");
+            return false;
+        }
+        jsondata = {"phone":phone, "type":2, "imageCode":imageCode};
         $.ajax(
             {
                 url: BASEURL +"/user/verification",
@@ -166,6 +183,10 @@ $(function () {
                     }
                 },
                 error:function (xhr,status,p3,p4) {
+
+                },
+                complete:function () {
+                    $("#btn-yzm").attr("disabled", false);
                 }
             }
         )
@@ -198,4 +219,5 @@ $(function () {
             },1000);
         });
     }
+
 });

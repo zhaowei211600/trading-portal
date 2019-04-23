@@ -78,40 +78,41 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">原始投资金额（元）</label>
                 <div class="layui-input-block">
-                    <input type="number" id="investAmount" name="investAmount"  lay-verify="required" required autofocus placeholder="请填写原始投资金额(元)" autocomplete="off" class="layui-input">
+                    <input type="number" id="investAmount" name="investAmount" placeholder="请填写原始投资金额(元)" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">原始投资日期</label>
                 <div class="layui-input-block">
-                    <input type="text" name="investDate" id="investDate" readonly="readonly" lay-verify="required" required autofocus placeholder="请选择原始投资日期" autocomplete="off" class="layui-input">
+                    <input type="text" name="investDate" id="investDate"  placeholder="请选择原始投资日期" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">股票上市发行日期</label>
                 <div class="layui-input-block">
-                    <input type="text" name="stockDate" id="stockDate" readonly="readonly"  lay-verify="required" required autofocus placeholder="请选择股票上市发行日期" autocomplete="off" class="layui-input">
+                    <input type="text" name="stockDate" id="stockDate"  placeholder="请选择股票上市发行日期" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">股票IPO发行价（元）</label>
                 <div class="layui-input-block">
-                    <input type="number" name="listUnitPrice" id="listUnitPrice"  lay-verify="required" required autofocus placeholder="请填写股票IPO发行价(元)" autocomplete="off" class="layui-input">
+                    <input type="number" name="listUnitPrice" id="listUnitPrice"   placeholder="请填写股票IPO发行价(元)" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">减持所有股票数（股）</label>
                 <div class="layui-input-block">
-                    <input type="number" name="reductionQuantity" id="reductionQuantity"  lay-verify="required" required autofocus placeholder="请填写减持所有股票数(股)" autocomplete="off" class="layui-input">
+                    <input type="number" name="reductionQuantity" id="reductionQuantity"  placeholder="请填写减持所有股票数(股)" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">减持股票单价（元）</label>
                 <div class="layui-input-block">
-                    <input type="number" name="reductionUnitPrice" id="reductionUnitPrice"  lay-verify="required" required autofocus placeholder="请填写减持股票单价(元)" autocomplete="off" class="layui-input">
+                    <input type="number" name="reductionUnitPrice" id="reductionUnitPrice"  placeholder="请填写减持股票单价(元)" autocomplete="off" class="layui-input">
                 </div>
             </div>
-            <button type="button" class="login-btn"  lay-submit lay-filter="formDemo" id="stat">立即计算</button>
+            <button type="button" class="login-btn"   id="stat">立即计算</button>
+            <!--lay-submit lay-filter="formDemo"-->
             <!--<button class="layui-btn layui-btn-normal"  lay-submit lay-filter="formDemo">立即计算</button>-->
         </form>
 
@@ -147,7 +148,82 @@
             layui.use('layer', function(){
                 var layer = layui.layer;
             });
+            
+            $('#stat').click(function () {
+                var corpType = $('#corpType').val()
+                var investAmount = parseFloat($('#investAmount').val());
+                var investDate = $('#investDate').val()
+                var stockDate= $('#stockDate').val()
+                var listUnitPrice =$('#listUnitPrice').val()
+                var reductionQuantity = parseFloat($('#reductionQuantity').val());
+                var reductionUnitPrice = parseFloat($('#reductionUnitPrice').val());
+                if(corpType.length < 1){
+                    layer.msg("请选择企业性质");
+                    return false;
+                }
+                if( $('#investAmount').val().length < 1){
+                    layer.msg("请填写原始投资金额");
+                    return false;
+                }
+                if(investDate.length < 1){
+                    layer.msg("请选择原始投资日期");
+                    return false;
+                }
+                if(stockDate.length < 1){
+                    layer.msg("请选择股票上市发行日期");
+                    return false;
+                }
+                if(listUnitPrice.length < 1){
+                    layer.msg("请填写股票IPO发行价");
+                    return false;
+                }
+                if($('#reductionQuantity').val().length < 1){
+                    layer.msg("请填写减持所有股票数");
+                    return false;
+                }
+                if($('#reductionUnitPrice').val().length < 1){
+                    layer.msg("请填写减持股票单价");
+                    return false;
+                }
 
+                if(investAmount>0 && reductionQuantity>0 && reductionUnitPrice>0){
+                    reductionAmount = reductionQuantity * reductionUnitPrice;
+                    if(investAmount < reductionAmount){
+                        layer.msg("减持金额不能大于原始投资");
+                        return false;
+                    }
+                }else{
+                    layer.msg("请填写相关信息");
+                    return false;
+                }
+                var params = {
+                    corpType:corpType,
+                    investAmount:$('#investAmount').val(),
+                    investDate:investDate,
+                    stockDate:stockDate,
+                    listUnitPrice:listUnitPrice,
+                    reductionQuantity:$('#reductionQuantity').val(),
+                    reductionUnitPrice:$('#reductionUnitPrice').val(),
+                    statType:1
+                }
+                $.ajax({
+                    url: BASEURL + "/util/stat",
+                    data: JSON.stringify(params),
+                    type: "post",
+                    dataType: "json",
+                    contentType: "application/json",
+                    success: function (data) {
+                        if (data.returnCode == "200") {
+                            localStorage.setItem("statResponse", JSON.stringify(data.data));
+                            localStorage.setItem("statRequest", JSON.stringify(params));
+                            window.location.href = "../../pages/stock/indexResult.html";
+                        }else{
+                            layer.msg("计算错误！");
+                        }
+                    }
+                })
+
+            })
             layui.use('form', function(){
                 var form = layui.form;
 
