@@ -67,6 +67,7 @@
         .box{
             padding: 15px;
         }
+        .ovfHiden{overflow: hidden;height: 100%;}
     </style>
 </head>
 <body>
@@ -203,14 +204,14 @@
     <div class="box" style="display: none">
         <form class="layui-form" action="">
             <div class="layui-form-item">
-                <input type="input" name="phone" id="phone"  lay-verify="required" required autofocus placeholder="留下您的手机号" autocomplete="off" class="layui-input">
+                <input type="input" name="phone" id="phone"  placeholder="留下您的手机号" autocomplete="off" class="layui-input">
             </div>
             <div class="layui-form-item">
-                <input type="input" name="imageCode" id="imageCode"  lay-verify="required" required autofocus  placeholder="填写验证码" style="width: 55%;float: left;" autocomplete="off" class="layui-input">
+                <input type="input" name="imageCode" id="imageCode"  placeholder="填写验证码" style="width: 55%;float: left;" autocomplete="off" class="layui-input">
                 <div class="layui-form-mid layui-word-aux"><img style="height: 38px;" id="messageImg" onclick="refreshImageCode()" src=""></div>
             </div>
             <div class="layui-form-item">
-                <input type="input" name="messageCode"  lay-verify="required" autofocus required   placeholder="填写短信验证码" style="width: 55%;float: left;" autocomplete="off" class="layui-input">
+                <input type="input" name="messageCode"  placeholder="填写短信验证码" style="width: 55%;float: left;" autocomplete="off" class="layui-input">
                 <div class="layui-form-mid layui-word-aux" style="width: 39%;"><button type="button" class="layui-btn layui-btn-primary" id="getMessage" onclick="getMessageCode()" style="padding: 0 5px;width: 1.3rem;">获取短信验证码</button></div>
             </div>
             <div class="red f14">提交后即可获得优化后的减持结果</div>
@@ -284,6 +285,18 @@
             //监听提交
             form.on('submit(formDemo)', function(data){
                 //console.log(JSON.stringify(data.field));
+                if(data.field.phone.length < 1){
+                    layer.msg('请输入您的手机号')
+                    return
+                }
+                if(data.field.imageCode.length < 1){
+                    layer.msg('请输入验证码')
+                    return
+                }
+                if(data.field.messageCode.length < 1){
+                    layer.msg('请输入短信验证码')
+                    return
+                }
                 var data = $.extend(requestData,data.field)
                 data.statType = '2'
                 $.ajax({
@@ -294,6 +307,7 @@
                     contentType: "application/json",
                     success: function (resp) {
                         layer.close(index)
+                        $('html,body').removeClass('ovfHiden');
                         if(resp.returnCode == '200'){
                             $('#popBox').hide()
                             $('#reginCal').show()
@@ -329,7 +343,11 @@
                     title:'查看优化信息',
                     type: 1,
                     content:$('.box'),//这里content是一个普通的String
+                    cancel:function () {
+                        $('html,body').removeClass('ovfHiden');
+                    }
                 });
+            $('html,body').addClass('ovfHiden');
             // });
             refreshImageCode()
         })
