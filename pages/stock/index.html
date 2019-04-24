@@ -276,6 +276,12 @@
                 elem: '#stockDate' //指定元素
             });
         });
+        $("#investDate").focus(function(){
+            document.activeElement.blur();
+        });
+        $("#stockDate").focus(function(){
+            document.activeElement.blur();
+        });
     </script>
 </body>
 </html>

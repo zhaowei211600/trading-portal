@@ -207,12 +207,12 @@
                 <input type="input" name="phone" id="phone"  placeholder="留下您的手机号" autocomplete="off" class="layui-input">
             </div>
             <div class="layui-form-item">
-                <input type="input" name="imageCode" id="imageCode"  placeholder="填写验证码" style="width: 55%;float: left;" autocomplete="off" class="layui-input">
+                <input type="input" name="imageCode" id="imageCode"  placeholder="填写验证码" maxlength="4" style="width: 55%;float: left;" autocomplete="off" class="layui-input">
                 <div class="layui-form-mid layui-word-aux"><img style="height: 38px;" id="messageImg" onclick="refreshImageCode()" src=""></div>
             </div>
             <div class="layui-form-item">
-                <input type="input" name="messageCode"  placeholder="填写短信验证码" style="width: 55%;float: left;" autocomplete="off" class="layui-input">
-                <div class="layui-form-mid layui-word-aux" style="width: 39%;"><button type="button" class="layui-btn layui-btn-primary" id="getMessage" onclick="getMessageCode()" style="padding: 0 5px;width: 130px;">获取短信验证码</button></div>
+                <input type="input" name="messageCode" maxlength="6"  placeholder="填写短信验证码" style="width: 55%;float: left;" autocomplete="off" class="layui-input">
+                <div class="layui-form-mid layui-word-aux" style="width: 39%;"><button type="button" class="layui-btn layui-btn-primary" id="getMessage" onclick="getMessageCode()" style="padding: 0 5px;width: 110px;">获取短信验证码</button></div>
             </div>
             <div class="red f14">提交后即可获得优化后的减持结果</div>
             <button type="button" class="login-btn"  lay-submit lay-filter="formDemo">获得优化结果</button>

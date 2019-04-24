@@ -12,17 +12,37 @@ $(function () {
     refreshImageCode();
 
     $("#login").click(function () {
-        phone = $("#phone").val();
-        password = $("#password").val();
+        phone = $.trim($("#phone").val());//手机号
+        password = $.trim($("#password").val());//密码
         passcheck =  checkPassword(password);
-        captcha = $("#yzm").val();
-        realName = $("#realName").val();
-        //cardNo = $("#cardNo").val();
-        recommender = $("#recommender").val();
-        recommenderPhone = $("#recommenderPhone").val();
-        imageCode = $("#yzm_img").val();
-
+        captcha = $.trim($("#yzm").val());//校验码
+        realName = $.trim($("#realName").val());//真实姓名
+        recommender = $.trim($("#recommender").val());
+        recommenderPhone = $.trim($("#recommenderPhone").val());
+        imageCode = $.trim($("#yzm_img").val());//图片校验码
+        var phoneReg = /^(13[0-9]|14[1|5|6|7|9]|15[0|1|2|3|5|6|7|8|9]|16[2|5||7]|17[0|1|2|3|5|6|7|8]|18[0-9]|19[1|8|9])\d{8}$/
         phonecheck = checkPhone(phone,1,passcheck,password,captcha);
+        if(realName.length < 1){
+            greenAlertBox('请输入真实姓名');
+            return
+        }
+        if(!phoneReg.test(phone)){
+            greenAlertBox('请输入正确手机号');
+            return
+        }
+        if(password.length < 1){
+            greenAlertBox('请设置密码');
+            return
+        }
+        if(imageCode.length < 1){
+            greenAlertBox('请输入图片验证码');
+            return
+        }
+        if(captcha.length < 1){
+            greenAlertBox('请输入短信验证码');
+            return
+        }
+
         if(!phonecheck) {
             if (phone == '' || phone == null) {
                 //alert("用户名不能为空！");
@@ -50,7 +70,13 @@ $(function () {
     //手机号验证码校验
     $("#btn-yzm").on('click',function () {
         phone = $("#phone").val();
+        imageCode = $.trim($("#yzm_img").val());//图片校验码
+        if(imageCode.length < 1){
+            greenAlertBox('请输入图片验证码');
+            return
+        }
         phonecheck = checkPhone(phone,2);
+
         if(!phonecheck) {
             if (phone == '' || phone == null) {
                 //alert("用户名不能为空！");
@@ -62,7 +88,7 @@ $(function () {
             }
             return false
         }
-        getyzm(phone);
+        getyzm(phone, imageCode);
     });
 
     //登录校验ajax，登陆成功 重定向 失败  alert（）
@@ -91,8 +117,8 @@ $(function () {
     }
 
     //校验手机短信验证码
-    function getyzm(phone) {
-        jsondata = {"phone":phone,"type":1};
+    function getyzm(phone, imageCode) {
+        jsondata = {"phone":phone,'imageCode':imageCode,"type":1};
         $.ajax(
             {
                 url: BASEURL +"/user/verification",
