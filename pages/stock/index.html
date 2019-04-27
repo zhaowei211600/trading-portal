@@ -90,7 +90,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">股票上市发行日期</label>
                 <div class="layui-input-block">
-                    <input type="text" name="stockDate" id="stockDate"  placeholder="请选择股票上市发行日期" class="layui-input">
+                    <input type="text" name="listDate" id="listDate"  placeholder="请选择股票上市发行日期" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -153,7 +153,7 @@
                 var corpType = $('#corpType').val()
                 var investAmount = parseFloat($('#investAmount').val());
                 var investDate = $('#investDate').val()
-                var stockDate= $('#stockDate').val()
+                var listDate= $('#listDate').val()
                 var listUnitPrice =$('#listUnitPrice').val()
                 var reductionQuantity = parseFloat($('#reductionQuantity').val());
                 var reductionUnitPrice = parseFloat($('#reductionUnitPrice').val());
@@ -169,7 +169,7 @@
                     layer.msg("请选择原始投资日期");
                     return false;
                 }
-                if(stockDate.length < 1){
+                if(listDate.length < 1){
                     layer.msg("请选择股票上市发行日期");
                     return false;
                 }
@@ -200,7 +200,7 @@
                     corpType:corpType,
                     investAmount:$('#investAmount').val(),
                     investDate:investDate,
-                    stockDate:stockDate,
+                    listDate:listDate,
                     listUnitPrice:listUnitPrice,
                     reductionQuantity:$('#reductionQuantity').val(),
                     reductionUnitPrice:$('#reductionUnitPrice').val(),
@@ -273,13 +273,13 @@
                 elem: '#investDate' //指定元素
             });
             laydate.render({
-                elem: '#stockDate' //指定元素
+                elem: '#listDate' //指定元素
             });
         });
         $("#investDate").focus(function(){
             document.activeElement.blur();
         });
-        $("#stockDate").focus(function(){
+        $("#listDate").focus(function(){
             document.activeElement.blur();
         });
     </script>
